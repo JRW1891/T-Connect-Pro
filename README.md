@@ -4,7 +4,7 @@
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-02-05 11:54:54
+ * @LastEditTime: 2025-02-05 11:56:15
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -40,6 +40,14 @@
 ### Actual Product Image
 
 ## Module
+
+### 1. MCU
+
+* Chip: ESP32-S3-R8
+* PSRAM: 8M (Octal SPI) 
+* FLASH: 16M
+* Related documentation: 
+    >[Espressif ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
 ### 2. Screen
 
