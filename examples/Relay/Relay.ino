@@ -1,10 +1,8 @@
 /*
- * @Description: None
- * @version: V1.0.0
- * @Author: None
- * @Date: 2024-07-08 16:34:12
- * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-07-08 16:45:18
+ * @Description: Relay test
+ * @Author: LILYGO_L
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:53:00
  * @License: GPL 3.0
  */
 

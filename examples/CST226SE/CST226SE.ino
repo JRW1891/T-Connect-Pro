@@ -1,27 +1,8 @@
 /*
- * @Description(CN):
- *      基于Arduino_DriveBus库的CST226SE芯片例程
- *      以下是使用该款芯片需要注意的几个点：
- *      1. CST226SE暂时只能进入休眠模式而不能退出，如需退出需要重置
- *      2. 在使用Arduino_DriveBus库时，初始化阶段会对芯片进行一次初始化的写入数据，具体
- * 初始化内容可以前往芯片文件下的XXX_Initialization_Operations[]这个数组查看
- *      3. Arduino_DriveBus库使用枚举的方式寄存操作芯片的命令和值，具体的可执行命令已经在
- * 芯片文件的@Description有说明
- *
- *  * @Description(EN):
- *    CST226SE chip routine based on Arduino_DriveBus library
- *    Here are a few points to note when using this chip:
- *    1. CST226SE can only enter sleep mode temporarily and cannot exit. If you need to exit, you need to reset it.
- *    2. When using the Arduino_DriveBus library, the chip is initialized with data during the initialization phase.
- *  The specific initialization content can be viewed in the XXX_Initialization_Operations[] array under the chip file.
- *    3. The Arduino_DriveBus library uses enumerations to register commands and values for chip operations.
- *  The specific executable commands are explained in the chip file under @Description.
- *
- * @version: V1.0.0
- * @Author: Xk_w
- * @Date: 2023-08-25 17:09:20
- * @LastEditors: Xk_w
- * @LastEditTime: 2024-02-28 14:19:22
+ * @Description: Touch test
+ * @Author: LILYGO_L
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:50:05
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus_Library.h"

@@ -1,14 +1,11 @@
-/* ESP32 TWAI transmit example.
-  This transmits a message every second.
+/*
+ * @Description: CAN test
+ * @Author: LILYGO_L
+ * @Date: 2024-11-07 10:04:14
+ * @LastEditTime: 2025-02-05 13:50:24
+ * @License: GPL 3.0
+ */
 
-  Connect a CAN bus transceiver to the RX/TX pins.
-  For example: SN65HVD230
-
-  The API gives other possible speeds and alerts:
-  https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/twai.html
-
-  created 27-06-2023 by Stephan Martin (designer2k2)
-*/
 #include <Arduino.h>
 #include "driver/twai.h"
 #include "pin_config.h"

@@ -1,10 +1,8 @@
 /*
  * @Description: 出厂测试程序
- * @version: V1.0.0
  * @Author: LILYGO_L
- * @Date: 2023-09-06 10:58:19
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-01-23 11:00:03
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:52:35
  * @License: GPL 3.0
  */
 

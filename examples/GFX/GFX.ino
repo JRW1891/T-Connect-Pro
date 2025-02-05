@@ -1,9 +1,7 @@
 /*
- * @Description: None
- * @version: V1.0.0
- * @Author: None
- * @Date: 2023-07-25 13:45:02
- * @LastEditors: LILYGO_L
+ * @Description: GFX
+ * @Author: LILYGO_L
+ * @Date: 2025-02-05 13:48:33
  * @LastEditTime: 2024-07-08 18:38:18
  * @License: GPL 3.0
  */

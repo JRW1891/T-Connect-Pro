@@ -1,10 +1,8 @@
 /*
- * @Description: None
- * @version: V1.0.0
- * @Author: None
- * @Date: 2023-07-15 17:35:13
- * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-03-29 14:45:35
+ * @Description: Ethernet scan
+ * @Author: LILYGO_L
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:50:49
  * @License: GPL 3.0
  */
 

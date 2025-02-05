@@ -1,10 +1,8 @@
 /*
- * @Description:
- * @version: V1.0.0
+ * @Description: Ethernet HTTP test
  * @Author: LILYGO_L
- * @Date: 2023-07-18 16:27:34
- * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-07-09 10:31:23
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:49:57
  * @License: GPL 3.0
  */
 #include <SPI.h>

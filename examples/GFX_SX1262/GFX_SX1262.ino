@@ -1,12 +1,11 @@
 /*
- * @Description: None
- * @version: V1.0.0
- * @Author: None
- * @Date: 2023-07-25 13:45:02
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2024-08-13 16:14:55
+ * @Description: GFX SX1262 test
+ * @Author: LILYGO_L
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:51:57
  * @License: GPL 3.0
  */
+
 #include <Arduino.h>
 #include "Arduino_GFX_Library.h"
 #include "RadioLib.h"

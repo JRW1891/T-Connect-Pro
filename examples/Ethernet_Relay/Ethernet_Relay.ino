@@ -1,10 +1,8 @@
 /*
- * @Description: 出厂测试文件，安装好硬件后打开串口获取IP即可控制继电器
- * @version: V1.0.0
+ * @Description: Ethernet relay test
  * @Author: LILYGO_L
- * @Date: 2023-07-18 16:27:34
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2024-07-29 17:19:52
+ * @Date: 2025-02-05 13:49:27
+ * @LastEditTime: 2025-02-05 13:49:27
  * @License: GPL 3.0
  */
 #include <SPI.h>

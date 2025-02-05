@@ -1,15 +1,8 @@
 /*
- * @Description(CN):
- *      T-Panel上板载RS485通信例程
- *
- * @Description(EN):
- *      On-board RS485 communication routine on T-Panel
- *
- * @version: V1.0.0
+ * @Description: RS485 test
  * @Author: LILYGO_L
- * @Date: 2023-06-21 18:42:16
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-01-16 17:45:31
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:53:18
  * @License: GPL 3.0
  */
 #include <Arduino.h>

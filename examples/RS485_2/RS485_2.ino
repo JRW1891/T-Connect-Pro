@@ -1,10 +1,8 @@
 /*
- * @Description: None
- * @version: V1.0.0
+ * @Description: RS485_2 test
  * @Author: LILYGO_L
- * @Date: 2023-08-16 15:19:01
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2024-07-30 11:04:29
+ * @Date: 2025-02-05 13:48:33
+ * @LastEditTime: 2025-02-05 13:53:57
  * @License: GPL 3.0
  */
 #include <Arduino.h>
