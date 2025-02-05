@@ -4,7 +4,7 @@
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-02-05 11:56:15
+ * @LastEditTime: 2025-02-05 12:06:07
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -34,6 +34,7 @@
 
 ## Describe
 
+T-Connect-Pro is a product based on the ESP32S3 main control chip, consisting of three stacked circuit boards. It features a wide range of functions and is equipped with three different communication modules: CAN, RS485, and RS232, enabling long-distance data transmission. The product includes an Ethernet interface, a relay interface, and a LoRa module (SX1262). It also comes with an LCD screen to facilitate easier operation.
 
 ## Preview
 
