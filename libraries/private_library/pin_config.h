@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-06-05 13:01:59
- * @LastEditTime: 2025-01-16 15:31:57
+ * @LastEditTime: 2025-02-05 11:04:18
  */
 #pragma once
 
@@ -57,5 +57,8 @@
 #define IIC_SCL 40
 
 //CST226SE
+#define TOUCH_SDA 39
+#define TOUCH_SCL 40
 #define TOUCH_RST 47
 #define TOUCH_INT 3
+
