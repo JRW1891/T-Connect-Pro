@@ -1,7 +1,7 @@
 /*
  * @Description: PCF8567定时中断示例程序
  * @version: V1.0.0
- * @Author: Xk_w
+ * @Author: LILYGO_L
  * @Date: 2024-03-27 10:02:26
  * @LastEditors: Xk_w
  * @LastEditTime: 2024-06-06 18:26:25

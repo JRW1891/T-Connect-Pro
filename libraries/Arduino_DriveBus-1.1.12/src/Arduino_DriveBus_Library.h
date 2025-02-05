@@ -12,7 +12,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:49:20
  * @LastEditors: LILYGO_L
- * @LastEditTime: 2024-06-21 14:15:37
+ * @LastEditTime: 2024-05-15 16:47:07
  * @License: GPL 3.0
  */
 #pragma once
@@ -27,7 +27,6 @@
 
 #include "./power_chip/Arduino_ETA4662.h"
 #include "./power_chip/Arduino_SY6970.h"
-#include "./power_chip/Arduino_SGM41562.h"
 
 #include "./touch_chip/Arduino_CST816x.h"
 #include "./touch_chip/Arduino_CST2xxSE.h"
