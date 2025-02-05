@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2025-02-05 11:43:56
+ * @LastEditTime: 2025-02-05 11:53:40
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -71,7 +71,8 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 * 芯片：SX1262
 * 使用总线通信协议：标准SPI
 * 相关资料：
-    >[HPD16A_V1.1](./information/HPDTEK_HPD16A_TCXO_V1.1.pdf)
+    >[HPD16A_V1.1](./information/HPDTEK_HPD16A_TCXO_V1.1.pdf) 
+    <br />
     >[SX1262_V2.1](./information/DS_SX1261-2_V2_1.pdf)
 * 依赖库：
     >[RadioLib-6.6.0](https://github.com/jgromes/RadioLib)

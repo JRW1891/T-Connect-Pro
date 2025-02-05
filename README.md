@@ -4,7 +4,7 @@
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-02-05 11:50:29
+ * @LastEditTime: 2025-02-05 11:53:53
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -65,6 +65,7 @@
 * Bus communication protocol: Standard SPI
 * Related documentation: 
     >[HPD16A_V1.1](./information/HPDTEK_HPD16A_TCXO_V1.1.pdf)
+    <br />
     >[SX1262_V2.1](./information/DS_SX1261-2_V2_1.pdf)
 * Dependent libraries: 
     >[RadioLib-6.6.0](https://github.com/jgromes/RadioLib)
