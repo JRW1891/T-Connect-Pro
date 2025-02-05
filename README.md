@@ -1,9 +1,7 @@
 <!--
  * @Description: None
- * @version: V1.0.0
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditors: Please set LastEditors
  * @LastEditTime: 2025-02-05 16:20:07
  * @License: GPL 3.0
 -->
