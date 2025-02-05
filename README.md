@@ -4,19 +4,19 @@
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-02-05 16:18:51
+ * @LastEditTime: 2025-02-05 16:20:07
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
 
 ## **English | [中文](./README_CN.md)**
 
-## Version Iteration:
+## VersionIteration:
 | Version                              | Update date                       |
 | :-------------------------------: | :-------------------------------: |
 | T-Connect-Pro_V1.0                      | 2025-02-05                    |
 
-## Purchase Link
+## PurchaseLink
 
 | Product                     | SOC           |  FLASH  |  PSRAM   | Link                   |
 | :------------------------: | :-----------: |:-------: | :---------: | :------------------: |
