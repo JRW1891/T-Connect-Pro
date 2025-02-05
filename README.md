@@ -4,134 +4,126 @@
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-01-24 10:23:39
+ * @LastEditTime: 2025-02-05 11:50:29
  * @License: GPL 3.0
 -->
-<h1 align = "center">T-Circle-S3</h1>
-
-<p align="center" width="100%">
-    <img src="image/12.jpg" alt="">
-</p>
+<h1 align = "center">T-Connect-Pro</h1>
 
 ## **English | [中文](./README_CN.md)**
 
 ## Version iteration:
 | Version                              | Update date                       |
 | :-------------------------------: | :-------------------------------: |
-| T-Circle-S3_V1.0                      | 2024-08-15                         |
+| T-Connect-Pro_V1.0                      | 2025-02-05                    |
 
 ## PurchaseLink
 
 | Product                     | SOC           |  FLASH  |  PSRAM   | Link                   |
 | :------------------------: | :-----------: |:-------: | :---------: | :------------------: |
-| T-Circle-S3_V1.0   | ESP32S3R8 |   16M   | 8M (Octal SPI) |  [LILYGO Mall](https://lilygo.cc/products/t-circle-s3?_pos=1&_sid=6fa6d0d3e&_ss=r)  |
+| T-Connect-Pro_V1.0   | ESP32S3R8 |   16M   | 8M (Octal SPI) |  [NULL]()   |
 
 ## Directory
 - [Describe](#describe)
 - [Preview](#preview)
 - [Module](#module)
-- [QuickStart](#quickstart)
+- [SoftwareDeployment](#SoftwareDeployment)
 - [PinOverview](#pinoverview)
 - [RelatedTests](#RelatedTests)
 - [FAQ](#faq)
 - [Project](#project)
-- [Information](#information)
-- [DependentLibraries](#dependentlibraries)
 
 ## Describe
 
-T-Circle-S3 is a development board with a 0.75-inch onboard small screen developed based on the ESP32S3, equipped with a speaker, microphone, and three-color LED lights. It has six programmable input/output IO ports on the back, which can be expanded to connect a variety of peripherals.
 
 ## Preview
 
 ### Actual Product Image
 
-<p align="center" width="100%">
-    <img src="image/12.jpg" alt="">
-</p>
-
----
-
-<p align="center" width="100%">
-    <img src="image/13.jpg" alt="">
-</p>
-
----
-
-<p align="center" width="100%">
-    <img src="image/14.jpg" alt="">
-</p>
-
 ## Module
-
-### 1.MCU
-
-* Chip: ESP32-S3-R8
-* PSRAM: 8M (Octal SPI) 
-* FLASH: 16M
-* For more details, please visit [Espressif ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
 ### 2. Screen
 
-* Size: 0.75-inch LCD round screen
-* Resolution: 160x160px
-* Screen type: TFT , LCD
-* Driver chip: GC9D01N
-* Compatibility library: Arduino_GFX
+<!-- * Size:  -->
+* Resolution: 222x480px
+* Screen type: TFT、LCD
+* Driver chip: ST7796
 * Bus communication protocol: Standard SPI
+* Dependent libraries: 
+    >[Arduino_GFX-1.4.6](https://github.com/moononournation/Arduino_GFX)
 
 ### 3. Touch
 
-* Chip: CST816D
+* Chip: CST226SE
 * Bus communication protocol: IIC
+* Dependent libraries: 
+    >[Arduino_DriveBus-1.1.2](https://github.com/Xk-w/Arduino_DriveBus)
 
-### 4. Speaker
+### 4. Lora
 
-* Driver Chip: MAX98357A
-* Bus Communication Protocol: IIS
+* Module: HPD16A
+* Chip: SX1262
+* Bus communication protocol: Standard SPI
+* Related documentation: 
+    >[HPD16A_V1.1](./information/HPDTEK_HPD16A_TCXO_V1.1.pdf)
+    >[SX1262_V2.1](./information/DS_SX1261-2_V2_1.pdf)
+* Dependent libraries: 
+    >[RadioLib-6.6.0](https://github.com/jgromes/RadioLib)
 
-### 5. Microphone
+### 5. CAN
 
-* Driver Chip: MSM261S4030H0R
-* Bus Communication Protocol: IIS
+* Module: TD501MCANFD
+* Bus communication protocol: TWAI
+* Related documentation: 
+    >[TD501MCANFD](./information/TD501MCANFD_MORNSUN.pdf)
 
-### 6. LED
+### 6. RS485
 
-* Chip: APA102
+* module: TD501D485H-A
+* Bus communication protocol: UART
+* Related documentation: 
+    >[TD501D485H-A](./information/TD501D485H-A_K-CUT.pdf)
 
-## QuickStart
+### 7. RS232
+
+* module: TD501D232H
+* Bus communication protocol: UART
+* Related documentation: 
+    >[TD501D232H](./information/TD501D232H_WJ146289.pdf)
+
+### 8. Ethernet
+
+* Chip: W5500
+* Bus communication protocol: Standard SPI
+* Related documentation: 
+    >[Ethernet_V2.0.0](http://www.arduino.cc/en/Reference/Ethernet)
+
+## SoftwareDeployment
 
 ### Examples Support
 
-| Example | `[Platformio IDE][espressif32-v6.5.0]`<br />`[Arduino IDE][esp32_v2.0.14]` | `[ESP-IDF][esp-idf-V4.4.8]`| `[ESP-IDF][esp-idf-V5.3.2]`| Description | Picture |
-| ------  | ------  | ------ | ------ | ------ | ------ | 
-| [Animated_Eyes_1](./examples/Animated_Eyes_1) |  <p align="center">![alt text][supported] | || |  |
-| [APA102_Blink](./examples/APA102_Blink) | <p align="center">![alt text][supported] | | ||  |
-| [CST816D](./examples/CST816D) | <p align="center">![alt text][supported] |  |  |
-| [DMIC_ReadData](./examples/DMIC_ReadData) | <p align="center">![alt text][supported] | || |  |
-| [DMIC_ReadData](./examples/DMIC_ReadData) | <p align="center">![alt text][supported] | || |  |
-| [GFX](./examples/GFX) | <p align="center">![alt text][supported] |  |  |
-| [GFX_CST816D_Image](./examples/GFX_CST816D_Image) | <p align="center">![alt text][supported] | | ||  |
-| [GFX_Wifi_AP_Contract](./examples/GFX_Wifi_AP_Contract) | <p align="center">![alt text][supported] | || |  |
-| [GFX_Wifi_STA_Contract](./examples/GFX_Wifi_STA_Contract) | <p align="center">![alt text][supported] | || |  |
-| [IIC_Scan_2](./examples/IIC_Scan_2) | <p align="center">![alt text][supported] | | ||  |
-| [Original_Test](./examples/Original_Test) | <p align="center">![alt text][supported] ||| Original factory test files |  |
-| [TFT](./examples/TFT) | <p align="center">![alt text][supported] | || |  |
-| [Voice_Speaker](./examples/Voice_Speaker) | <p align="center">![alt text][supported] |  ||  |  |
-| [Voice_Speaker_APA102](./examples/Voice_Speaker_APA102) | <p align="center">![alt text][supported] | ||  |  |
-| [Wifi_Music](./examples/Wifi_Music) | <p align="center">![alt text][supported] | ||  |  |
-| [lilygo_s3_apps](https://github.com/Xinyuan-LilyGO/T-Circle-S3/tree/esp-idf-V4.4.8/examples/lilygo_s3_apps) || <p align="center">![alt text][supported] | | This example is a voice control example provided by Grovety. Below is the original link: <br /> [Grovety lilygo_s3_apps](https://github.com/Grovety/lilygo_s3_apps)| <p align="center"> <img src="image/1.jpg" alt="example" width="100%"> </p> |
-| [XiaoZhi_AI_Chatbot](https://github.com/78/xiaozhi-esp32?tab=readme-ov-file) | || <p align="center">![alt text][supported] | This example is a Xiaozhi AI example, provided by Xiaoxia.| <p align="center"> <img src="image/15.jpg" alt="example" width="100%"> </p> |
+| Example | `[Platformio IDE][espressif32-v6.5.0]`<br />`[Arduino IDE][esp32_v2.0.14]` | Description | Picture |
+| ------  | ------ | ------ | ------ | 
+| [CAN](./examples/CAN) |  <p align="center">![alt text][supported] | | |
+| [CST226SE](./examples/CST226SE) |  <p align="center">![alt text][supported] | | |
+| [Ethernet_HTTP](./examples/Ethernet_HTTP) |  <p align="center">![alt text][supported] | | |
+| [Ethernet_Relay](./examples/Ethernet_Relay) |  <p align="center">![alt text][supported] | | |
+| [Ethernet_Scan](./examples/Ethernet_Scan) |  <p align="center">![alt text][supported] | | |
+| [GFX](./examples/GFX) |  <p align="center">![alt text][supported] | | |
+| [GFX_SX1262](./examples/GFX_SX1262) |  <p align="center">![alt text][supported] | | |
+| [Original_Test](./examples/Original_Test) |  <p align="center">![alt text][supported] | Original factory program | |
+| [Relay](./examples/Relay) |  <p align="center">![alt text][supported] | | |
+| [RS485](./examples/RS485) |  <p align="center">![alt text][supported] | | |
+| [RS485_2](./examples/RS485_2) |  <p align="center">![alt text][supported] | | |
+| [SX126x_Channel_Activity_Detection_Blocking](./examples/SX126x_Channel_Activity_Detection_Blocking) |  <p align="center">![alt text][supported] | | |
+| [SX126x_Channel_Activity_Detection_Interrupt](./examples/SX126x_Channel_Activity_Detection_Interrupt) |  <p align="center">![alt text][supported] | | |
+| [SX126x_PingPong](./examples/SX126x_PingPong) |  <p align="center">![alt text][supported] | | |
+| [SX1262_Receive_Interrupt](./examples/SX1262_Receive_Interrupt) |  <p align="center">![alt text][supported] | | |
 
 [supported]: https://img.shields.io/badge/-supported-green "example"
 
 | Firmware | Description | Picture |
 | ------  | ------  | ------ |
-| [Original_Test](./firmware/[T-Circle-S3_V1.0][Original_Test]_firmware_V1.0.1.bin)s Original version |  |
-| [GFX_Wifi_AP_Contract](./firmware/[T-Circle-S3_V1.0][GFX_Wifi_AP_Contract]_firmware_V1.0.0) | Original version |  |
-| [GFX_Wifi_STA_Contract](./firmware/[T-Circle-S3_V1.0][GFX_Wifi_STA_Contract]_firmware_V1.0.0) | Original version |  |
-| [lilygo_s3_apps](./firmware/[T-Circle-S3_V1.0]_[lilygo_s3_apps]_firmware_V1.0.0.bin) | Original version |  |
-| [xiaozhi_esp32](./firmware/[T-Circle-S3_V1.0][xiaozhi-esp32_V1.0.1]_firmware_202501240943.bin) | |  |
+| [Original_Test](./firmware/(Lora带宽调整为125Khz)[T-Connect-Pro_V1.0][Original_Test]_firmware_202501200954.bin) | Original factory program |  |
 
 ### PlatformIO
 1. Install[VisualStudioCode](https://code.visualstudio.com/Download),Choose installation based on your system type.
@@ -192,37 +184,55 @@ T-Circle-S3 is a development board with a 0.75-inch onboard small screen develop
 
 ## PinOverview
 
-| LCD screen pins  | ESP32S3 pins|
+| Screen pins  | ESP32S3 pins|
 | :------------------: | :------------------:|
-| MOSI         | IO17       |
-| DC         | IO16       |
-| SCLK         | IO15       |
-| CS         | IO13       |
-| BL         | IO18       |
+| MOSI         | IO11       |
+| MISO         | IO13       |
+| DC         | IO41       |
+| SCLK         | IO12       |
+| CS         | IO21       |
+| BL         | IO46       |
 
-| Touch chip pins  | ESP32S3 pins|
+| Touch pins  | ESP32S3 pins|
 | :------------------: | :------------------:|
-| INT         | IO12       |
-| SDA         | IO11       |
-| SCL         | IO14       |
+| SDA         | IO39      |
+| SCL         | IO40       |
+| RST         | IO47      |
+| INT         | IO3       |
 
-| Microphone pin  | ESP32S3 pins|
+| Ethernet pins  | ESP32S3 pins|
 | :------------------: | :------------------:|
-| BCLK         | IO7       |
-| WS         | IO9       |
-| DATA         | IO8       |
+| MOSI         | IO11       |
+| MISO         | IO13       |
+| RST         | IO48       |
+| SCLK         | IO12       |
+| CS         | IO10       |
+| INT         | IO9       |
 
-| Speaker pins  | ESP32S3 pins|
+| Lora pins  | ESP32S3 pins|
 | :------------------: | :------------------:|
-| BCLK         | IO5       |
-| LRCLK         | IO4       |
-| SD_MODE         | IO45       |
-| DATA         | IO6       |
+| MOSI         | IO11       |
+| MISO         | IO13       |
+| RST         | IO42       |
+| SCLK         | IO12       |
+| CS         | IO14       |
+| INT/DIO1         | IO45       |
+| BUSY         | IO38       |
 
-| LED pins  | ESP32S3 pins|
+| RS485 pins  | ESP32S3 pins|
 | :------------------: | :------------------:|
-| CLOCK         | IO39       |
-| DATA         | IO38       |
+| UART_TX         | IO17       |
+| UART_RX         | IO18       |
+
+| RS232 pins  | ESP32S3 pins|
+| :------------------: | :------------------:|
+| UART_TX         | IO4       |
+| UART_RX         | IO5       |
+
+| CAN pins  | ESP32S3 pins|
+| :------------------: | :------------------:|
+| TWAI_TX         | IO6      |
+| TWAI_RX         | IO7       |
 
 ## RelatedTests
 
@@ -247,19 +257,5 @@ T-Circle-S3 is a development board with a 0.75-inch onboard small screen develop
 * A. Please hold down the "BOOT-0" button and try downloading the program again.
 
 ## Project
-* [T-Circle-S3_V1.0](./project/T-Circle-S3_V1.0_V1.0.pdf)
-
-## Information
-* [GC9D01N](./information/GC9D01N.pdf)
-* [APA102_2020_LED](./information/APA102_2020_LED.pdf)
-* [MSM261S4030H0R](./information/MSM261S4030H0R.pdf)
-* [MAX98357AETE+T](./information/MAX98357AETE+T.pdf)
-
-## DependentLibraries
-* [Arduino_GFX-1.3.7](https://github.com/moononournation/Arduino_GFX)
-* [Arduino_DriveBus-1.1.12](https://github.com/Xk-w/Arduino_DriveBus)
-* [ESP32-audioI2S-3.0.6](https://github.com/schreibfaul1/ESP32-audioI2S)
-* [FastLED-3.6.0](https://github.com/FastLED/FastLED)
-* [TFT_eSPI-2.5.43](https://github.com/Bodmer/TFT_eSPI)
-* [DFRobot_MSM261](https://github.com/DFRobot/DFrobot_MSM261)
+* [T-Connect-Pro_V1.0](./project/T-Connect-Pro_V1.0.pdf)
 

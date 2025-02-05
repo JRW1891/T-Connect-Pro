@@ -1,10 +1,8 @@
 <!--
  * @Description: None
- * @version: V1.0.0
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2025-02-05 11:17:05
+ * @LastEditTime: 2025-02-05 11:43:56
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -48,7 +46,7 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 * PSRAM：8M (Octal SPI) 
 * FLASH：16M
 * 相关资料：
-    >[ESP32-S3­-WROOM­-1_datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)
+    >[[Espressif ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
 ### 2. 屏幕
 
@@ -56,7 +54,6 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 * 分辨率：222x480px
 * 屏幕类型：TFT、LCD
 * 驱动芯片：ST7796
-* 兼容库：Arduino_GFX
 * 总线通信协议：标准SPI
 * 依赖库：
     >[Arduino_GFX-1.4.6](https://github.com/moononournation/Arduino_GFX)
@@ -102,7 +99,7 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 
 ### 8. 以太网
 
-* 模块：W5500
+* 芯片：W5500
 * 使用总线通信协议：标准SPI
 * 依赖库：
     >[Ethernet_V2.0.0](http://www.arduino.cc/en/Reference/Ethernet)
@@ -243,7 +240,6 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 | :------------------: | :------------------:|
 | TWAI_TX         | IO6      |
 | TWAI_RX         | IO7       |
-
 
 ## 相关测试
 
