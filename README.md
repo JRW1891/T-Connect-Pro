@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2025-02-05 16:20:07
+ * @LastEditTime: 2025-02-19 11:22:45
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -130,7 +130,7 @@ T-Connect-Pro is a product based on the ESP32S3 main control chip, consisting of
 
 | Firmware | Description | Picture |
 | ------  | ------  | ------ |
-| [Original_Test](./firmware/(Lora带宽调整为125Khz)[T-Connect-Pro_V1.0][Original_Test]_firmware_202501200954.bin) | Original factory program |  |
+| [Original_Test](./firmware/(屏幕色彩测试项增加黑色背景测试)[T-Connect-Pro_V1.0][Original_Test]_firmware_202502191117.bin) | Original factory program |  |
 
 ### PlatformIO
 1. Install[VisualStudioCode](https://code.visualstudio.com/Download),Choose installation based on your system type.

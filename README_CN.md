@@ -130,7 +130,7 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 
 | Firmware | Description | Picture |
 | ------  | ------  | ------ |
-| [Original_Test](./firmware/(Lora带宽调整为125Khz)[T-Connect-Pro_V1.0][Original_Test]_firmware_202501200954.bin) | 出厂程序 |  |
+| [Original_Test](./firmware/(屏幕色彩测试项增加黑色背景测试)[T-Connect-Pro_V1.0][Original_Test]_firmware_202502191117.bin) | 出厂程序 |  |
 
 ### PlatformIO
 1. 安装[VisualStudioCode](https://code.visualstudio.com/Download)，根据你的系统类型选择安装。
