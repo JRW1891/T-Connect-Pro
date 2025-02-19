@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-02-05 13:52:35
+ * @LastEditTime: 2025-02-19 11:18:32
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "20250121017"
+#define SOFTWARE_LASTEDITTIME "202502191117"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -2641,6 +2641,8 @@ void Original_Test_4()
     delay(3000);
     gfx->fillScreen(BLUE);
     delay(3000);
+    gfx->fillScreen(WHITE);
+    delay(3000);
 
     switch (Current_Rotation)
     {
@@ -2651,6 +2653,9 @@ void Original_Test_4()
 
         gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_2, SCREEN_WIDTH, SCREEN_HEIGHT);
         delay(3000);
+
+        gfx->fillScreen(BLACK);
+        delay(3000);
         break;
     case 1:
     case 3:
@@ -2658,6 +2663,9 @@ void Original_Test_4()
         delay(3000);
 
         gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_4, SCREEN_HEIGHT, SCREEN_WIDTH);
+        delay(3000);
+
+        gfx->fillScreen(BLACK);
         delay(3000);
 
         break;
@@ -2669,20 +2677,22 @@ void Original_Test_4()
 
 void Original_Test_4_Loop()
 {
-    switch (Current_Rotation)
-    {
-    case 0:
-    case 2:
-        gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_2, SCREEN_WIDTH, SCREEN_HEIGHT);
-        break;
-    case 1:
-    case 3:
-        gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_4, SCREEN_HEIGHT, SCREEN_WIDTH);
-        break;
+    // switch (Current_Rotation)
+    // {
+    // case 0:
+    // case 2:
+    //     gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_2, SCREEN_WIDTH, SCREEN_HEIGHT);
+    //     break;
+    // case 1:
+    // case 3:
+    //     gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_4, SCREEN_HEIGHT, SCREEN_WIDTH);
+    //     break;
 
-    default:
-        break;
-    }
+    // default:
+    //     break;
+    // }
+
+    gfx->fillScreen(BLACK);
 
     GFX_Print_FINISH();
 
