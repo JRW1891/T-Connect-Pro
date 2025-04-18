@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-02-19 11:18:32
+ * @LastEditTime: 2025-04-18 13:34:45
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202502191117"
+#define SOFTWARE_LASTEDITTIME "202504081533"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -383,7 +383,7 @@ struct SX1262_Operator
 
     struct
     {
-        float value = 914.9;
+        float value = 920.0;
         bool change_flag = false;
     } frequency;
     struct
