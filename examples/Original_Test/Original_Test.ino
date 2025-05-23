@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-04-18 13:34:45
+ * @LastEditTime: 2025-05-23 09:12:41
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202504081533"
+#define SOFTWARE_LASTEDITTIME "202504261030"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -368,7 +368,7 @@ struct Ethernet_Relay_Operator
     bool html_relay1_flag = false;
 };
 
-struct SX1262_Operator
+struct Lora_Operator
 {
     using state = enum {
         UNCONNECTED, // 未连接
@@ -383,7 +383,7 @@ struct SX1262_Operator
 
     struct
     {
-        float value = 920.0;
+        float value = 915.0;
         bool change_flag = false;
     } frequency;
     struct
@@ -408,12 +408,26 @@ struct SX1262_Operator
     } sync_word;
     struct
     {
+#ifdef T_Connect_Pro_V1_0_SX1262
         int8_t value = 22;
+#elif defined T_Connect_Pro_V1_0_SX1276
+        int8_t value = 17;
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
+
         bool change_flag = false;
     } output_power;
     struct
     {
+#ifdef T_Connect_Pro_V1_0_SX1262
         float value = 140;
+#elif defined T_Connect_Pro_V1_0_SX1276
+        float value = 240;
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
+
         bool change_flag = false;
     } current_limit;
     struct
@@ -472,9 +486,15 @@ EthernetServer server(80);
 RS485_Operator RS485_OP;
 CAN_Operator CAN_OP;
 Ethernet_Relay_Operator Ethernet_Relay_OP;
-SX1262_Operator SX1262_OP;
+Lora_Operator Lora_Op;
 
+#ifdef T_Connect_Pro_V1_0_SX1262
 SX1262 radio = new Module(SX1262_CS, SX1262_DIO1, SX1262_RST, SX1262_BUSY, SPI);
+#elif defined T_Connect_Pro_V1_0_SX1276
+SX1276 radio = new Module(SX1276_CS, SX1276_DIO1, SX1276_RST, SX1276_BUSY, SPI);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
 Arduino_DataBus *bus = new Arduino_HWSPI(
     SCREEN_DC /* DC */, SCREEN_CS /* CS */, SCREEN_SCLK /* SCK */,
@@ -498,10 +518,12 @@ void Arduino_IIC_Touch_Interrupt(void)
     CST226SE->IIC_Interrupt_Flag = true;
 }
 
-void Dio1_Action_Interrupt(void)
+void Lora_Operation_Interrupt(void)
 {
+#ifdef T_Connect_Pro_V1_0_SX1262
     // we sent or received a packet, set the flag
-    SX1262_OP.operation_flag = true;
+    Lora_Op.operation_flag = true;
+#endif
 }
 
 bool Touch_Rotation_Convert(int32_t *x, int32_t *y)
@@ -2212,51 +2234,51 @@ void GFX_Print_Ethernet_Info_Loop(void)
     }
 }
 
-bool SX1262_Set_Default_Parameters(String *assertion)
+bool SX12xx_Set_Default_Parameters(String *assertion)
 {
-    if (radio.setFrequency(SX1262_OP.frequency.value) == RADIOLIB_ERR_INVALID_FREQUENCY)
+    if (radio.setFrequency(Lora_Op.frequency.value) == RADIOLIB_ERR_INVALID_FREQUENCY)
     {
         *assertion = "Failed to set frequency value";
         return false;
     }
-    if (radio.setBandwidth(SX1262_OP.bandwidth.value) == RADIOLIB_ERR_INVALID_BANDWIDTH)
+    if (radio.setBandwidth(Lora_Op.bandwidth.value) == RADIOLIB_ERR_INVALID_BANDWIDTH)
     {
         *assertion = "Failed to set bandwidth value";
         return false;
     }
-    if (radio.setOutputPower(SX1262_OP.output_power.value) == RADIOLIB_ERR_INVALID_OUTPUT_POWER)
+    if (radio.setOutputPower(Lora_Op.output_power.value) == RADIOLIB_ERR_INVALID_OUTPUT_POWER)
     {
         *assertion = "Failed to set output_power value";
         return false;
     }
-    if (radio.setCurrentLimit(SX1262_OP.current_limit.value) == RADIOLIB_ERR_INVALID_CURRENT_LIMIT)
+    if (radio.setCurrentLimit(Lora_Op.current_limit.value) == RADIOLIB_ERR_INVALID_CURRENT_LIMIT)
     {
         *assertion = "Failed to set current_limit value";
         return false;
     }
-    if (radio.setPreambleLength(SX1262_OP.preamble_length.value) == RADIOLIB_ERR_INVALID_PREAMBLE_LENGTH)
+    if (radio.setPreambleLength(Lora_Op.preamble_length.value) == RADIOLIB_ERR_INVALID_PREAMBLE_LENGTH)
     {
         *assertion = "Failed to set preamble_length value";
         return false;
     }
-    if (radio.setCRC(SX1262_OP.crc.value) == RADIOLIB_ERR_INVALID_CRC_CONFIGURATION)
+    if (radio.setCRC(Lora_Op.crc.value) == RADIOLIB_ERR_INVALID_CRC_CONFIGURATION)
     {
         *assertion = "Failed to set crc value";
         return false;
     }
-    if (SX1262_OP.current_mode == SX1262_OP.mode::LORA)
+    if (Lora_Op.current_mode == Lora_Op.mode::LORA)
     {
-        if (radio.setSpreadingFactor(SX1262_OP.spreading_factor.value) == RADIOLIB_ERR_INVALID_SPREADING_FACTOR)
+        if (radio.setSpreadingFactor(Lora_Op.spreading_factor.value) == RADIOLIB_ERR_INVALID_SPREADING_FACTOR)
         {
             *assertion = "Failed to set spreading_factor value";
             return false;
         }
-        if (radio.setCodingRate(SX1262_OP.coding_rate.value) == RADIOLIB_ERR_INVALID_CODING_RATE)
+        if (radio.setCodingRate(Lora_Op.coding_rate.value) == RADIOLIB_ERR_INVALID_CODING_RATE)
         {
             *assertion = "Failed to set coding_rate value";
             return false;
         }
-        if (radio.setSyncWord(SX1262_OP.sync_word.value) != RADIOLIB_ERR_NONE)
+        if (radio.setSyncWord(Lora_Op.sync_word.value) != RADIOLIB_ERR_NONE)
         {
             *assertion = "Failed to set sync_word value";
             return false;
@@ -2268,7 +2290,7 @@ bool SX1262_Set_Default_Parameters(String *assertion)
     return true;
 }
 
-void GFX_Print_SX1262_Connect_Button()
+void GFX_Print_SX12xx_Connect_Button()
 {
     switch (Current_Rotation)
     {
@@ -2298,7 +2320,7 @@ void GFX_Print_SX1262_Connect_Button()
     }
 }
 
-bool GFX_Print_SX1262_Connect_Button_Trigger(int32_t x, int32_t y)
+bool GFX_Print_SX12xx_Connect_Button_Trigger(int32_t x, int32_t y)
 {
     if ((x == -1) && (y == -1))
     {
@@ -2331,13 +2353,19 @@ bool GFX_Print_SX1262_Connect_Button_Trigger(int32_t x, int32_t y)
     return false;
 }
 
-bool GFX_Print_SX1262_Info(void)
+bool GFX_Print_SX12xx_Info(void)
 {
     gfx->fillScreen(WHITE);
     gfx->setTextSize(2);
     gfx->setTextColor(PURPLE);
     gfx->setCursor(40, 10);
+#ifdef T_Connect_Pro_V1_0_SX1262
     gfx->printf("SX1262 Info");
+#elif defined T_Connect_Pro_V1_0_SX1276
+    gfx->printf("SX1276 Info");
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
     gfx->setTextSize(1);
     gfx->setTextColor(BLACK);
@@ -2352,10 +2380,16 @@ bool GFX_Print_SX1262_Info(void)
     gfx->setCursor(15, 170);
     gfx->printf("<---------Receive Info---------> ");
 
+#ifdef T_Connect_Pro_V1_0_SX1262
     SPI.begin(SX1262_SCLK, SX1262_MISO, SX1262_MOSI);
+#elif defined T_Connect_Pro_V1_0_SX1276
+    SPI.begin(SX1276_SCLK, SX1276_MISO, SX1276_MOSI);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
     int16_t state = -1;
-    if (SX1262_OP.current_mode == SX1262_OP.mode::LORA)
+    if (Lora_Op.current_mode == Lora_Op.mode::LORA)
     {
         state = radio.begin();
     }
@@ -2367,37 +2401,37 @@ bool GFX_Print_SX1262_Info(void)
     if (state == RADIOLIB_ERR_NONE)
     {
         String temp_str;
-        if (SX1262_Set_Default_Parameters(&temp_str) == false)
+        if (SX12xx_Set_Default_Parameters(&temp_str) == false)
         {
-            Serial.printf("SX1262 Failed to set default parameters\n");
-            Serial.printf("SX1262 assertion: %s\n", temp_str.c_str());
-            SX1262_OP.initialization_flag = false;
+            Serial.printf("SX12xx Failed to set default parameters\n");
+            Serial.printf("SX12xx assertion: %s\n", temp_str.c_str());
+            Lora_Op.initialization_flag = false;
             return false;
         }
         if (radio.startReceive() != RADIOLIB_ERR_NONE)
         {
-            Serial.printf("SX1262 Failed to start receive\n");
-            SX1262_OP.initialization_flag = false;
+            Serial.printf("SX12xx Failed to start receive\n");
+            Lora_Op.initialization_flag = false;
             return false;
         }
     }
     else
     {
-        Serial.printf("SX1262 initialization failed\n");
+        Serial.printf("SX12xx initialization failed\n");
         Serial.printf("Error code: %d\n", state);
-        SX1262_OP.initialization_flag = false;
+        Lora_Op.initialization_flag = false;
         return false;
     }
 
-    Serial.printf("SX1262 initialization successful\n");
-    SX1262_OP.initialization_flag = true;
+    Serial.printf("SX12xx initialization successful\n");
+    Lora_Op.initialization_flag = true;
 
     return true;
 }
 
-void GFX_Print_SX1262_Info_Loop()
+void GFX_Print_SX12xx_Info_Loop()
 {
-    if (SX1262_OP.initialization_flag == true)
+    if (Lora_Op.initialization_flag == true)
     {
         if (millis() > CycleTime)
         {
@@ -2408,7 +2442,7 @@ void GFX_Print_SX1262_Info_Loop()
             gfx->printf("[Status]: Init successful");
             gfx->setTextColor(BLACK);
             gfx->setCursor(20, 50);
-            if (SX1262_OP.current_mode == SX1262_OP.mode::LORA)
+            if (Lora_Op.current_mode == Lora_Op.mode::LORA)
             {
                 gfx->printf("[Mode]: LoRa");
             }
@@ -2418,38 +2452,38 @@ void GFX_Print_SX1262_Info_Loop()
             }
             gfx->setTextColor(BLACK);
             gfx->setCursor(20, 60);
-            gfx->printf("[Frequency]: %.1f MHz", SX1262_OP.frequency.value);
+            gfx->printf("[Frequency]: %.1f MHz", Lora_Op.frequency.value);
 
             gfx->setCursor(20, 70);
-            gfx->printf("[Bandwidth]: %.1f KHz", SX1262_OP.bandwidth.value);
+            gfx->printf("[Bandwidth]: %.1f KHz", Lora_Op.bandwidth.value);
 
             gfx->setCursor(20, 80);
-            gfx->printf("[Output Power]: %d dBm", SX1262_OP.output_power.value);
+            gfx->printf("[Output Power]: %d dBm", Lora_Op.output_power.value);
 
             gfx->fillRect(0, 110, SCREEN_WIDTH, 30, WHITE);
             gfx->setCursor(20, 110);
-            if (SX1262_OP.device_1.connection_flag == SX1262_OP.state::CONNECTED)
+            if (Lora_Op.device_1.connection_flag == Lora_Op.state::CONNECTED)
             {
                 gfx->setTextColor(DARKGREEN);
                 gfx->printf("[Connect]: Connected");
                 gfx->setCursor(20, 120);
-                gfx->printf("[Connecting MAC]: %012llX", SX1262_OP.device_1.mac);
+                gfx->printf("[Connecting MAC]: %012llX", Lora_Op.device_1.mac);
 
                 gfx->fillRect(0, 150, SCREEN_WIDTH, 20, WHITE);
                 gfx->setTextColor(BLACK);
                 gfx->setCursor(20, 150);
-                gfx->printf("[Send Data]: %u", SX1262_OP.device_1.send_data);
+                gfx->printf("[Send Data]: %u", Lora_Op.device_1.send_data);
 
                 gfx->fillRect(0, 180, SCREEN_WIDTH, 40, WHITE);
                 gfx->setTextColor(BLACK);
                 gfx->setCursor(20, 180);
-                gfx->printf("[Receive Data]: %u", SX1262_OP.device_1.receive_data);
+                gfx->printf("[Receive Data]: %u", Lora_Op.device_1.receive_data);
                 gfx->setCursor(20, 190);
-                gfx->printf("[Receive RSSI]: %.1f dBm", SX1262_OP.receive_rssi);
+                gfx->printf("[Receive RSSI]: %.1f dBm", Lora_Op.receive_rssi);
                 gfx->setCursor(20, 200);
-                gfx->printf("[Receive SNR]: %.1f dB", SX1262_OP.receive_snr);
+                gfx->printf("[Receive SNR]: %.1f dB", Lora_Op.receive_snr);
             }
-            else if (SX1262_OP.device_1.connection_flag == SX1262_OP.state::CONNECTING)
+            else if (Lora_Op.device_1.connection_flag == Lora_Op.state::CONNECTING)
             {
                 gfx->setTextColor(BLUE);
                 gfx->printf("[Connect]: Connecting");
@@ -2457,14 +2491,14 @@ void GFX_Print_SX1262_Info_Loop()
                 gfx->fillRect(0, 150, SCREEN_WIDTH, 20, WHITE);
                 gfx->setTextColor(BLACK);
                 gfx->setCursor(20, 150);
-                gfx->printf("[Send Data]: %u", SX1262_OP.device_1.send_data);
+                gfx->printf("[Send Data]: %u", Lora_Op.device_1.send_data);
 
                 gfx->fillRect(0, 180, SCREEN_WIDTH, 40, WHITE);
                 gfx->setTextColor(BLACK);
                 gfx->setCursor(20, 180);
                 gfx->printf("[Receive Data]: null");
             }
-            else if (SX1262_OP.device_1.connection_flag == SX1262_OP.state::UNCONNECTED)
+            else if (Lora_Op.device_1.connection_flag == Lora_Op.state::UNCONNECTED)
             {
                 gfx->setTextColor(RED);
                 gfx->printf("[Connect]: Unconnected");
@@ -2482,31 +2516,36 @@ void GFX_Print_SX1262_Info_Loop()
             CycleTime = millis() + 500;
         }
 
-        // if (SX1262_OP.device_1.connection_flag == SX1262_OP.state::CONNECTED)
+        // if (Lora_Op.device_1.connection_flag == Lora_Op.state::CONNECTED)
         // {
-        if (SX1262_OP.device_1.send_flag == true)
+        if (Lora_Op.device_1.send_flag == true)
         {
             if (millis() > CycleTime_2)
             {
-                SX1262_OP.device_1.send_flag = false;
+                Lora_Op.device_1.send_flag = false;
 
-                SX1262_OP.send_package[12] = (uint8_t)(SX1262_OP.device_1.send_data >> 24);
-                SX1262_OP.send_package[13] = (uint8_t)(SX1262_OP.device_1.send_data >> 16);
-                SX1262_OP.send_package[14] = (uint8_t)(SX1262_OP.device_1.send_data >> 8);
-                SX1262_OP.send_package[15] = (uint8_t)SX1262_OP.device_1.send_data;
+                Lora_Op.send_package[12] = (uint8_t)(Lora_Op.device_1.send_data >> 24);
+                Lora_Op.send_package[13] = (uint8_t)(Lora_Op.device_1.send_data >> 16);
+                Lora_Op.send_package[14] = (uint8_t)(Lora_Op.device_1.send_data >> 8);
+                Lora_Op.send_package[15] = (uint8_t)Lora_Op.device_1.send_data;
 
                 // send another one
-                Serial.println("[SX1262] Sending another packet ... ");
+                Serial.println("[SX12xx] Sending another packet ... ");
 
-                radio.transmit(SX1262_OP.send_package, 16);
+                radio.transmit(Lora_Op.send_package, 16);
                 radio.startReceive();
             }
         }
         // }
 
-        if (SX1262_OP.operation_flag == true)
+        if ((radio.getIRQFlags() & RADIOLIB_SX127X_CLEAR_IRQ_FLAG_RX_DONE) > 0)
         {
-            SX1262_OP.operation_flag = false;
+            Lora_Op.operation_flag = true;
+        }
+
+        if (Lora_Op.operation_flag == true)
+        {
+            Lora_Op.operation_flag = false;
 
             uint8_t receive_package[16] = {'\0'};
             if (radio.readData(receive_package, 16) == RADIOLIB_ERR_NONE)
@@ -2529,36 +2568,36 @@ void GFX_Print_SX1262_Info_Loop()
 
                     if (temp_mac != Local_MAC)
                     {
-                        SX1262_OP.device_1.mac = temp_mac;
-                        SX1262_OP.device_1.receive_data =
+                        Lora_Op.device_1.mac = temp_mac;
+                        Lora_Op.device_1.receive_data =
                             ((uint32_t)receive_package[12] << 24) |
                             ((uint32_t)receive_package[13] << 16) |
                             ((uint32_t)receive_package[14] << 8) |
                             (uint32_t)receive_package[15];
 
                         // packet was successfully received
-                        Serial.printf("[SX1262] Received packet\n");
+                        Serial.printf("[SX12xx] Received packet\n");
 
                         // print data of the packet
                         for (int i = 0; i < 16; i++)
                         {
-                            Serial.printf("[SX1262] Data[%d]: %#X\n", i, receive_package[i]);
+                            Serial.printf("[SX12xx] Data[%d]: %#X\n", i, receive_package[i]);
                         }
 
                         // print RSSI (Received Signal Strength Indicator)
-                        SX1262_OP.receive_rssi = radio.getRSSI();
-                        Serial.printf("[SX1262] RSSI: %.1f dBm", SX1262_OP.receive_rssi);
+                        Lora_Op.receive_rssi = radio.getRSSI();
+                        Serial.printf("[SX12xx] RSSI: %.1f dBm", Lora_Op.receive_rssi);
 
                         // print SNR (Signal-to-Noise Ratio)
-                        SX1262_OP.receive_snr = radio.getSNR();
-                        Serial.printf("[SX1262] SNR: %.1f dB", SX1262_OP.receive_snr);
+                        Lora_Op.receive_snr = radio.getSNR();
+                        Serial.printf("[SX12xx] SNR: %.1f dB", Lora_Op.receive_snr);
 
-                        SX1262_OP.device_1.send_data = SX1262_OP.device_1.receive_data + 1;
+                        Lora_Op.device_1.send_data = Lora_Op.device_1.receive_data + 1;
 
-                        SX1262_OP.device_1.send_flag = true;
-                        SX1262_OP.device_1.connection_flag = SX1262_OP.state::CONNECTED;
+                        Lora_Op.device_1.send_flag = true;
+                        Lora_Op.device_1.connection_flag = Lora_Op.state::CONNECTED;
                         // 清除错误计数看门狗
-                        SX1262_OP.device_1.error_count = 0;
+                        Lora_Op.device_1.error_count = 0;
                         CycleTime_2 = millis() + 500;
                     }
                 }
@@ -2566,12 +2605,12 @@ void GFX_Print_SX1262_Info_Loop()
         }
         if (millis() > CycleTime_3)
         {
-            SX1262_OP.device_1.error_count++;
-            if (SX1262_OP.device_1.error_count > 10) // 10秒超时
+            Lora_Op.device_1.error_count++;
+            if (Lora_Op.device_1.error_count > 10) // 10秒超时
             {
-                SX1262_OP.device_1.error_count = 11;
-                SX1262_OP.device_1.send_data = 0;
-                SX1262_OP.device_1.connection_flag = SX1262_OP.state::UNCONNECTED;
+                Lora_Op.device_1.error_count = 11;
+                Lora_Op.device_1.send_data = 0;
+                Lora_Op.device_1.connection_flag = Lora_Op.state::UNCONNECTED;
             }
             CycleTime_3 = millis() + 1000;
         }
@@ -2739,7 +2778,14 @@ void Original_Test_6()
 {
     digitalWrite(W5500_CS, HIGH);
     digitalWrite(SCREEN_CS, HIGH);
+
+#ifdef T_Connect_Pro_V1_0_SX1262
     digitalWrite(SX1262_CS, HIGH);
+#elif defined T_Connect_Pro_V1_0_SX1276
+    digitalWrite(SX1276_CS, HIGH);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
     Ethernet_Initialization();
 }
@@ -2759,10 +2805,16 @@ void Original_Test_7()
 {
     digitalWrite(W5500_CS, HIGH);
     digitalWrite(SCREEN_CS, HIGH);
+#ifdef T_Connect_Pro_V1_0_SX1262
     digitalWrite(SX1262_CS, HIGH);
+#elif defined T_Connect_Pro_V1_0_SX1276
+    digitalWrite(SX1276_CS, HIGH);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
-    GFX_Print_SX1262_Info();
-    GFX_Print_SX1262_Connect_Button();
+    GFX_Print_SX12xx_Info();
+    GFX_Print_SX12xx_Connect_Button();
     GFX_Print_1();
 }
 
@@ -3201,13 +3253,19 @@ void Original_Test_Loop()
             {
                 digitalWrite(W5500_CS, HIGH);
                 digitalWrite(SCREEN_CS, HIGH);
+#ifdef T_Connect_Pro_V1_0_SX1262
                 digitalWrite(SX1262_CS, HIGH);
+#elif defined T_Connect_Pro_V1_0_SX1276
+                digitalWrite(SX1276_CS, HIGH);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
                 break;
             }
         }
     }
 
-    GFX_Print_TEST("SX1262 callback distance test");
+    GFX_Print_TEST("SX12xx callback distance test");
     if (Skip_Current_Test == false)
     {
         Original_Test_7();
@@ -3217,7 +3275,7 @@ void Original_Test_Loop()
 
             Rotation_Trigger(Original_Test_7);
 
-            GFX_Print_SX1262_Info_Loop();
+            GFX_Print_SX12xx_Info_Loop();
 
             // if (CST226SE->IIC_Interrupt_Flag == true)
             // {
@@ -3235,7 +3293,7 @@ void Original_Test_Loop()
                 switch (GFX_Print_1_Trigger(touch_x, touch_y))
                 {
                 case 1:
-                    GFX_Print_TEST("SX1262 callback distance test");
+                    GFX_Print_TEST("SX12xx callback distance test");
                     Original_Test_7();
                     if (Skip_Current_Test == true)
                     {
@@ -3250,12 +3308,12 @@ void Original_Test_Loop()
                     break;
                 }
 
-                if (GFX_Print_SX1262_Connect_Button_Trigger(touch_x, touch_y) == true)
+                if (GFX_Print_SX12xx_Connect_Button_Trigger(touch_x, touch_y) == true)
                 {
-                    SX1262_OP.device_1.send_flag = true;
-                    SX1262_OP.device_1.connection_flag = SX1262_OP.state::CONNECTING;
+                    Lora_Op.device_1.send_flag = true;
+                    Lora_Op.device_1.connection_flag = Lora_Op.state::CONNECTING;
                     // 清除错误计数看门狗
-                    SX1262_OP.device_1.error_count = 0;
+                    Lora_Op.device_1.error_count = 0;
                     CycleTime_2 = millis() + 1000;
                 }
             }
@@ -3265,7 +3323,13 @@ void Original_Test_Loop()
             {
                 digitalWrite(W5500_CS, HIGH);
                 digitalWrite(SCREEN_CS, HIGH);
+#ifdef T_Connect_Pro_V1_0_SX1262
                 digitalWrite(SX1262_CS, HIGH);
+#elif defined T_Connect_Pro_V1_0_SX1276
+                digitalWrite(SX1276_CS, HIGH);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
                 break;
             }
@@ -3282,11 +3346,17 @@ void setup()
 
     pinMode(W5500_CS, OUTPUT);
     pinMode(SCREEN_CS, OUTPUT);
-    pinMode(SX1262_CS, OUTPUT);
-
     digitalWrite(W5500_CS, HIGH);
     digitalWrite(SCREEN_CS, HIGH);
+#ifdef T_Connect_Pro_V1_0_SX1262
+    pinMode(SX1262_CS, OUTPUT);
     digitalWrite(SX1262_CS, HIGH);
+#elif defined T_Connect_Pro_V1_0_SX1276
+    pinMode(SX1276_CS, OUTPUT);
+    digitalWrite(SX1276_CS, HIGH);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
     pinMode(RELAY_1, OUTPUT);
     digitalWrite(RELAY_1, HIGH);
@@ -3300,7 +3370,7 @@ void setup()
     Serial1.begin(115200, SERIAL_8N1, RS485_RX_1, RS485_TX_1);
     Serial2.begin(115200, SERIAL_8N1, RS485_RX_2, RS485_TX_2);
 
-    radio.setDio1Action(Dio1_Action_Interrupt);
+    radio.setPacketReceivedAction(Lora_Operation_Interrupt);
 
     if (CST226SE->begin() == false)
     {
