@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-06-04 16:55:15
+ * @LastEditTime: 2025-06-04 17:02:56
  * @License: GPL 3.0
  */
 
@@ -2551,378 +2551,378 @@ bool GFX_Print_RTC_Switch_Button_Trigger(int32_t x, int32_t y)
 
 void Original_Test_Loop()
 {
-    // GFX_Print_TEST("Touch Test");
-    // if (Skip_Current_Test == false)
-    // {
-    //     Original_Test_1();
-
-    //     while (1)
-    //     {
-    //         bool temp = false;
-
-    //         Rotation_Trigger(Original_Test_1);
-
-    //         // if (CST226SE->IIC_Interrupt_Flag == true)
-    //         // {
-    //         //     CST226SE->IIC_Interrupt_Flag = false;
-
-    //         int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
-
-    //         if (CST226SE->IIC_Interrupt_Flag == true)
-    //         {
-    //             if (touch_x > SCREEN_WIDTH)
-    //             {
-    //                 gfx->fillRect(0, 40, SCREEN_WIDTH, SCREEN_HEIGHT / 2, WHITE);
-    //                 gfx->setTextSize(1);
-    //                 gfx->setTextColor(BLACK);
-
-    //                 gfx->setCursor(20, 50);
-    //                 gfx->printf("ID: %#X ", (int32_t)CST226SE->IIC_Device_ID());
-
-    //                 gfx->setCursor(20, 65);
-    //                 gfx->setTextColor(RED);
-    //                 gfx->printf("The Home button is triggered");
-    //             }
-
-    //             CST226SE->IIC_Interrupt_Flag = false;
-    //         }
-
-    //         uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
-
-    //         if (fingers_number > 0)
-    //         {
-    //             int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
-    //             int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
-
-    //             GFX_Print_Touch_Info_Loop();
-
-    //             Touch_Rotation_Convert(&touch_x, &touch_y);
-
-    //             switch (GFX_Print_1_Trigger(touch_x, touch_y))
-    //             {
-    //             case 1:
-    //                 GFX_Print_TEST("Touch Test");
-    //                 Original_Test_1();
-    //                 if (Skip_Current_Test == true)
-    //                 {
-    //                     temp = true;
-    //                 }
-    //                 break;
-    //             case 2:
-    //                 temp = true;
-    //                 break;
-
-    //             default:
-    //                 break;
-    //             }
-    //         }
-    //         // }
-
-    //         if (temp == true)
-    //         {
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // GFX_Print_TEST("LCD Backlight Test");
-    // if (Skip_Current_Test == false)
-    // {
-    //     Original_Test_3();
-    //     Original_Test_3_Loop();
-
-    //     while (1)
-    //     {
-    //         bool temp = false;
-
-    //         Rotation_Trigger(Original_Test_3_Loop);
-
-    //         // if (CST226SE->IIC_Interrupt_Flag == true)
-    //         // {
-    //         //     CST226SE->IIC_Interrupt_Flag = false;
-
-    //         uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
-
-    //         if (fingers_number > 0)
-    //         {
-    //             int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
-    //             int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
-
-    //             Touch_Rotation_Convert(&touch_x, &touch_y);
-
-    //             switch (GFX_Print_1_Trigger(touch_x, touch_y))
-    //             {
-    //             case 1:
-    //                 GFX_Print_TEST("LCD Backlight Test");
-    //                 Original_Test_3();
-    //                 Original_Test_3_Loop();
-    //                 if (Skip_Current_Test == true)
-    //                 {
-    //                     temp = true;
-    //                 }
-    //                 break;
-    //             case 2:
-    //                 temp = true;
-    //                 break;
-
-    //             default:
-    //                 break;
-    //             }
-    //         }
-    //         // }
-
-    //         if (temp == true)
-    //         {
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // GFX_Print_TEST("LCD Color Test");
-    // if (Skip_Current_Test == false)
-    // {
-    //     Original_Test_4();
-    //     Original_Test_4_Loop();
-    //     while (1)
-    //     {
-    //         bool temp = false;
-
-    //         Rotation_Trigger(Original_Test_4_Loop);
-
-    //         // if (CST226SE->IIC_Interrupt_Flag == true)
-    //         // {
-    //         //     CST226SE->IIC_Interrupt_Flag = false;
-    //         uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
-
-    //         if (fingers_number > 0)
-    //         {
-    //             int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
-    //             int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
-
-    //             Touch_Rotation_Convert(&touch_x, &touch_y);
-
-    //             switch (GFX_Print_1_Trigger(touch_x, touch_y))
-    //             {
-    //             case 1:
-    //                 GFX_Print_TEST("LCD Color Test");
-    //                 Original_Test_4();
-    //                 Original_Test_4_Loop();
-    //                 if (Skip_Current_Test == true)
-    //                 {
-    //                     temp = true;
-    //                 }
-    //                 break;
-    //             case 2:
-    //                 temp = true;
-    //                 break;
-
-    //             default:
-    //                 break;
-    //             }
-    //         }
-    //         // }
-
-    //         if (temp == true)
-    //         {
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // GFX_Print_TEST("SD Test");
-    // if (Skip_Current_Test == false)
-    // {
-    //     Original_Test_2();
-
-    //     while (1)
-    //     {
-    //         bool temp = false;
-
-    //         Rotation_Trigger(Original_Test_2);
-
-    //         if (millis() > CycleTime)
-    //         {
-    //             SD_Test_Loop();
-    //             CycleTime = millis() + 1000;
-    //         }
-
-    //         // if (CST226SE->IIC_Interrupt_Flag == true)
-    //         // {
-    //         //     CST226SE->IIC_Interrupt_Flag = false;
-
-    //         uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
-
-    //         if (fingers_number > 0)
-    //         {
-    //             int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
-    //             int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
-
-    //             Touch_Rotation_Convert(&touch_x, &touch_y);
-
-    //             switch (GFX_Print_1_Trigger(touch_x, touch_y))
-    //             {
-    //             case 1:
-    //                 GFX_Print_TEST("SD Test");
-    //                 Original_Test_2();
-    //                 if (Skip_Current_Test == true)
-    //                 {
-    //                     temp = true;
-    //                 }
-    //                 break;
-    //             case 2:
-    //                 temp = true;
-    //                 break;
-
-    //             default:
-    //                 break;
-    //             }
-    //         }
-    //         // }
-
-    //         if (temp == true)
-    //         {
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // GFX_Print_TEST("RTC Test");
-    // if (Skip_Current_Test == false)
-    // {
-    //     Original_Test_7();
-
-    //     while (1)
-    //     {
-    //         bool temp = false;
-
-    //         Rotation_Trigger(Original_Test_7);
-
-    //         if (millis() > CycleTime)
-    //         {
-    //             GFX_Print_RTC_Info_Loop();
-    //             CycleTime = millis() + 1000;
-    //         }
-
-    //         // if (CST226SE->IIC_Interrupt_Flag == true)
-    //         // {
-    //         //     CST226SE->IIC_Interrupt_Flag = false;
-
-    //         uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
-
-    //         if (fingers_number > 0)
-    //         {
-    //             int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
-    //             int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
-
-    //             Touch_Rotation_Convert(&touch_x, &touch_y);
-
-    //             switch (GFX_Print_1_Trigger(touch_x, touch_y))
-    //             {
-    //             case 1:
-    //                 GFX_Print_TEST("RTC Test");
-    //                 Original_Test_7();
-    //                 if (Skip_Current_Test == true)
-    //                 {
-    //                     temp = true;
-    //                 }
-    //                 break;
-    //             case 2:
-    //                 temp = true;
-    //                 break;
-
-    //             default:
-    //                 break;
-    //             }
-
-    //             if (GFX_Print_RTC_Switch_Button_Trigger(touch_x, touch_y) == true)
-    //             {
-    //                 // 重置时间
-    //                 //  关闭RTC
-    //                 PCF8563->IIC_Write_Device_State(PCF8563->Arduino_IIC_RTC::Device::RTC_CLOCK_RTC,
-    //                                                 PCF8563->Arduino_IIC_RTC::Device_State::RTC_DEVICE_OFF);
-    //                 // 时钟传感器设置秒
-    //                 PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_SECOND_DATA,
-    //                                                 58);
-    //                 // 时钟传感器设置分
-    //                 PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_MINUTE_DATA,
-    //                                                 59);
-    //                 // 时钟传感器设置时
-    //                 PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_HOUR_DATA,
-    //                                                 23);
-    //                 // 时钟传感器设置天
-    //                 PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_DAY_DATA,
-    //                                                 31);
-    //                 // 时钟传感器设置月
-    //                 PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_MONTH_DATA,
-    //                                                 12);
-    //                 // 时钟传感器设置
-    //                 PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_YEAR_DATA,
-    //                                                 99);
-    //                 // 开启RTC
-    //                 PCF8563->IIC_Write_Device_State(PCF8563->Arduino_IIC_RTC::Device::RTC_CLOCK_RTC,
-    //                                                 PCF8563->Arduino_IIC_RTC::Device_State::RTC_DEVICE_ON);
-
-    //                 CycleTime_2 = millis() + 1000;
-    //             }
-    //         }
-    //         // }
-
-    //         if (temp == true)
-    //         {
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // GFX_Print_TEST("WIFI STA Test");
-    // if (Skip_Current_Test == false)
-    // {
-    //     Original_Test_8();
-    //     while (1)
-    //     {
-    //         bool temp = false;
-
-    //         Rotation_Trigger(Original_Test_8_Loop);
-
-    //         // if (CST226SE->IIC_Interrupt_Flag == true)
-    //         // {
-    //         //     CST226SE->IIC_Interrupt_Flag = false;
-
-    //         uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
-
-    //         if (fingers_number > 0)
-    //         {
-    //             int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
-    //             int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
-
-    //             Touch_Rotation_Convert(&touch_x, &touch_y);
-
-    //             switch (GFX_Print_1_Trigger(touch_x, touch_y))
-    //             {
-    //             case 1:
-    //                 GFX_Print_TEST("WIFI STA Test");
-    //                 Original_Test_8();
-    //                 if (Skip_Current_Test == true)
-    //                 {
-    //                     temp = true;
-    //                 }
-    //                 break;
-    //             case 2:
-    //                 temp = true;
-    //                 break;
-
-    //             default:
-    //                 break;
-    //             }
-    //         }
-    //         // }
-
-    //         if (temp == true)
-    //         {
-    //             break;
-    //         }
-    //     }
-    // }
+    GFX_Print_TEST("Touch Test");
+    if (Skip_Current_Test == false)
+    {
+        Original_Test_1();
+
+        while (1)
+        {
+            bool temp = false;
+
+            Rotation_Trigger(Original_Test_1);
+
+            // if (CST226SE->IIC_Interrupt_Flag == true)
+            // {
+            //     CST226SE->IIC_Interrupt_Flag = false;
+
+            int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+
+            if (CST226SE->IIC_Interrupt_Flag == true)
+            {
+                if (touch_x > SCREEN_WIDTH)
+                {
+                    gfx->fillRect(0, 40, SCREEN_WIDTH, SCREEN_HEIGHT / 2, WHITE);
+                    gfx->setTextSize(1);
+                    gfx->setTextColor(BLACK);
+
+                    gfx->setCursor(20, 50);
+                    gfx->printf("ID: %#X ", (int32_t)CST226SE->IIC_Device_ID());
+
+                    gfx->setCursor(20, 65);
+                    gfx->setTextColor(RED);
+                    gfx->printf("The Home button is triggered");
+                }
+
+                CST226SE->IIC_Interrupt_Flag = false;
+            }
+
+            uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
+
+            if (fingers_number > 0)
+            {
+                int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+                int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+                GFX_Print_Touch_Info_Loop();
+
+                Touch_Rotation_Convert(&touch_x, &touch_y);
+
+                switch (GFX_Print_1_Trigger(touch_x, touch_y))
+                {
+                case 1:
+                    GFX_Print_TEST("Touch Test");
+                    Original_Test_1();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                    break;
+                case 2:
+                    temp = true;
+                    break;
+
+                default:
+                    break;
+                }
+            }
+            // }
+
+            if (temp == true)
+            {
+                break;
+            }
+        }
+    }
+
+    GFX_Print_TEST("LCD Backlight Test");
+    if (Skip_Current_Test == false)
+    {
+        Original_Test_3();
+        Original_Test_3_Loop();
+
+        while (1)
+        {
+            bool temp = false;
+
+            Rotation_Trigger(Original_Test_3_Loop);
+
+            // if (CST226SE->IIC_Interrupt_Flag == true)
+            // {
+            //     CST226SE->IIC_Interrupt_Flag = false;
+
+            uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
+
+            if (fingers_number > 0)
+            {
+                int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+                int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+                Touch_Rotation_Convert(&touch_x, &touch_y);
+
+                switch (GFX_Print_1_Trigger(touch_x, touch_y))
+                {
+                case 1:
+                    GFX_Print_TEST("LCD Backlight Test");
+                    Original_Test_3();
+                    Original_Test_3_Loop();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                    break;
+                case 2:
+                    temp = true;
+                    break;
+
+                default:
+                    break;
+                }
+            }
+            // }
+
+            if (temp == true)
+            {
+                break;
+            }
+        }
+    }
+
+    GFX_Print_TEST("LCD Color Test");
+    if (Skip_Current_Test == false)
+    {
+        Original_Test_4();
+        Original_Test_4_Loop();
+        while (1)
+        {
+            bool temp = false;
+
+            Rotation_Trigger(Original_Test_4_Loop);
+
+            // if (CST226SE->IIC_Interrupt_Flag == true)
+            // {
+            //     CST226SE->IIC_Interrupt_Flag = false;
+            uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
+
+            if (fingers_number > 0)
+            {
+                int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+                int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+                Touch_Rotation_Convert(&touch_x, &touch_y);
+
+                switch (GFX_Print_1_Trigger(touch_x, touch_y))
+                {
+                case 1:
+                    GFX_Print_TEST("LCD Color Test");
+                    Original_Test_4();
+                    Original_Test_4_Loop();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                    break;
+                case 2:
+                    temp = true;
+                    break;
+
+                default:
+                    break;
+                }
+            }
+            // }
+
+            if (temp == true)
+            {
+                break;
+            }
+        }
+    }
+
+    GFX_Print_TEST("SD Test");
+    if (Skip_Current_Test == false)
+    {
+        Original_Test_2();
+
+        while (1)
+        {
+            bool temp = false;
+
+            Rotation_Trigger(Original_Test_2);
+
+            if (millis() > CycleTime)
+            {
+                SD_Test_Loop();
+                CycleTime = millis() + 1000;
+            }
+
+            // if (CST226SE->IIC_Interrupt_Flag == true)
+            // {
+            //     CST226SE->IIC_Interrupt_Flag = false;
+
+            uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
+
+            if (fingers_number > 0)
+            {
+                int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+                int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+                Touch_Rotation_Convert(&touch_x, &touch_y);
+
+                switch (GFX_Print_1_Trigger(touch_x, touch_y))
+                {
+                case 1:
+                    GFX_Print_TEST("SD Test");
+                    Original_Test_2();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                    break;
+                case 2:
+                    temp = true;
+                    break;
+
+                default:
+                    break;
+                }
+            }
+            // }
+
+            if (temp == true)
+            {
+                break;
+            }
+        }
+    }
+
+    GFX_Print_TEST("RTC Test");
+    if (Skip_Current_Test == false)
+    {
+        Original_Test_7();
+
+        while (1)
+        {
+            bool temp = false;
+
+            Rotation_Trigger(Original_Test_7);
+
+            if (millis() > CycleTime)
+            {
+                GFX_Print_RTC_Info_Loop();
+                CycleTime = millis() + 1000;
+            }
+
+            // if (CST226SE->IIC_Interrupt_Flag == true)
+            // {
+            //     CST226SE->IIC_Interrupt_Flag = false;
+
+            uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
+
+            if (fingers_number > 0)
+            {
+                int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+                int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+                Touch_Rotation_Convert(&touch_x, &touch_y);
+
+                switch (GFX_Print_1_Trigger(touch_x, touch_y))
+                {
+                case 1:
+                    GFX_Print_TEST("RTC Test");
+                    Original_Test_7();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                    break;
+                case 2:
+                    temp = true;
+                    break;
+
+                default:
+                    break;
+                }
+
+                if (GFX_Print_RTC_Switch_Button_Trigger(touch_x, touch_y) == true)
+                {
+                    // 重置时间
+                    //  关闭RTC
+                    PCF8563->IIC_Write_Device_State(PCF8563->Arduino_IIC_RTC::Device::RTC_CLOCK_RTC,
+                                                    PCF8563->Arduino_IIC_RTC::Device_State::RTC_DEVICE_OFF);
+                    // 时钟传感器设置秒
+                    PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_SECOND_DATA,
+                                                    58);
+                    // 时钟传感器设置分
+                    PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_MINUTE_DATA,
+                                                    59);
+                    // 时钟传感器设置时
+                    PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_HOUR_DATA,
+                                                    23);
+                    // 时钟传感器设置天
+                    PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_DAY_DATA,
+                                                    31);
+                    // 时钟传感器设置月
+                    PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_MONTH_DATA,
+                                                    12);
+                    // 时钟传感器设置
+                    PCF8563->IIC_Write_Device_Value(PCF8563->Arduino_IIC_RTC::Device_Value::RTC_SET_YEAR_DATA,
+                                                    99);
+                    // 开启RTC
+                    PCF8563->IIC_Write_Device_State(PCF8563->Arduino_IIC_RTC::Device::RTC_CLOCK_RTC,
+                                                    PCF8563->Arduino_IIC_RTC::Device_State::RTC_DEVICE_ON);
+
+                    CycleTime_2 = millis() + 1000;
+                }
+            }
+            // }
+
+            if (temp == true)
+            {
+                break;
+            }
+        }
+    }
+
+    GFX_Print_TEST("WIFI STA Test");
+    if (Skip_Current_Test == false)
+    {
+        Original_Test_8();
+        while (1)
+        {
+            bool temp = false;
+
+            Rotation_Trigger(Original_Test_8_Loop);
+
+            // if (CST226SE->IIC_Interrupt_Flag == true)
+            // {
+            //     CST226SE->IIC_Interrupt_Flag = false;
+
+            uint8_t fingers_number = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_FINGER_NUMBER);
+
+            if (fingers_number > 0)
+            {
+                int32_t touch_x = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X);
+                int32_t touch_y = CST226SE->IIC_Read_Device_Value(CST226SE->Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y);
+
+                Touch_Rotation_Convert(&touch_x, &touch_y);
+
+                switch (GFX_Print_1_Trigger(touch_x, touch_y))
+                {
+                case 1:
+                    GFX_Print_TEST("WIFI STA Test");
+                    Original_Test_8();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                    break;
+                case 2:
+                    temp = true;
+                    break;
+
+                default:
+                    break;
+                }
+            }
+            // }
+
+            if (temp == true)
+            {
+                break;
+            }
+        }
+    }
 
     GFX_Print_TEST("RS485CAN Test");
     if (Skip_Current_Test == false)
