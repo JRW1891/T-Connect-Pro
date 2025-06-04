@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-04-21 14:10:56
+ * @LastEditTime: 2025-06-04 14:53:05
  * @License: GPL 3.0
  */
 
@@ -2413,7 +2413,7 @@ void setup()
 {
     Serial.begin(115200);
     Serial.println("Ciallo");
-    Serial.println("[T-Connect-Pro_" + (String)BOARD_VERSION "_No_Screen][" + (String)SOFTWARE_NAME +
+    Serial.println("[T-Connect-Pro_" + (String)BOARD_VERSION + "_No_Screen][" + (String)SOFTWARE_NAME +
                    "]_firmware_" + (String)SOFTWARE_LASTEDITTIME);
 
     pinMode(W5500_CS, OUTPUT);
