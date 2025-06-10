@@ -2,7 +2,7 @@
  * @Description: Ethernet HTTP test
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-02-05 13:49:57
+ * @LastEditTime: 2025-06-10 09:33:50
  * @License: GPL 3.0
  */
 #include <SPI.h>
@@ -52,6 +52,20 @@ void EthernetReset(const uint8_t resetPin)
 void setup()
 {
     Serial.begin(115200);
+
+    pinMode(W5500_CS, OUTPUT);
+    pinMode(SCREEN_CS, OUTPUT);
+    digitalWrite(W5500_CS, HIGH);
+    digitalWrite(SCREEN_CS, HIGH);
+#ifdef T_Connect_Pro_V1_0_SX1262
+    pinMode(SX1262_CS, OUTPUT);
+    digitalWrite(SX1262_CS, HIGH);
+#elif defined T_Connect_Pro_V1_0_SX1276
+    pinMode(SX1276_CS, OUTPUT);
+    digitalWrite(SX1276_CS, HIGH);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
     SPI.begin(W5500_SCLK, W5500_MISO, W5500_MOSI, W5500_CS);
     SPI.setFrequency(80000000);
