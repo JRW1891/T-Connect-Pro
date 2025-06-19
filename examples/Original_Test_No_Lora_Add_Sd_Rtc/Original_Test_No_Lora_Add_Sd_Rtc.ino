@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-06-04 17:02:56
+ * @LastEditTime: 2025-06-19 09:41:06
  * @License: GPL 3.0
  */
 
@@ -23,7 +23,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202506041434"
+#define SOFTWARE_LASTEDITTIME "202506190940"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -729,7 +729,7 @@ void Twai_Receive_Message(twai_message_t &message)
             // 清除错误计数看门狗
             CAN_OP.device_1.error.count = 0;
             CAN_OP.device_1.send_flag = true;
-            CycleTime_7 = millis() + 500;
+            CycleTime_7 = millis() + 2000;
         }
     }
 }
