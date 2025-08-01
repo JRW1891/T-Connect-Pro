@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-05-23 09:12:41
+ * @LastEditTime: 2025-08-01 18:39:34
  * @License: GPL 3.0
  */
 
@@ -518,13 +518,13 @@ void Arduino_IIC_Touch_Interrupt(void)
     CST226SE->IIC_Interrupt_Flag = true;
 }
 
+#ifdef T_Connect_Pro_V1_0_SX1262
 void Lora_Operation_Interrupt(void)
 {
-#ifdef T_Connect_Pro_V1_0_SX1262
     // we sent or received a packet, set the flag
     Lora_Op.operation_flag = true;
-#endif
 }
+#endif
 
 bool Touch_Rotation_Convert(int32_t *x, int32_t *y)
 {
@@ -2538,10 +2538,12 @@ void GFX_Print_SX12xx_Info_Loop()
         }
         // }
 
+#ifdef T_Connect_Pro_V1_0_SX1276
         if ((radio.getIRQFlags() & RADIOLIB_SX127X_CLEAR_IRQ_FLAG_RX_DONE) > 0)
         {
             Lora_Op.operation_flag = true;
         }
+#endif
 
         if (Lora_Op.operation_flag == true)
         {
@@ -3370,7 +3372,9 @@ void setup()
     Serial1.begin(115200, SERIAL_8N1, RS485_RX_1, RS485_TX_1);
     Serial2.begin(115200, SERIAL_8N1, RS485_RX_2, RS485_TX_2);
 
+#ifdef T_Connect_Pro_V1_0_SX1262
     radio.setPacketReceivedAction(Lora_Operation_Interrupt);
+#endif
 
     if (CST226SE->begin() == false)
     {
