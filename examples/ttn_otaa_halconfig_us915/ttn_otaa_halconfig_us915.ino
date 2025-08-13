@@ -10,7 +10,10 @@
  *
  * This example sends a valid LoRaWAN packet with payload "Hello,
  * world!", using frequency and encryption settings matching those of
- * the The Things Network.
+ * the The Things Network. It's pre-configured for the Adafruit
+ * Feather M0 LoRa.
+ * /!\ By default Adafruit Feather M0's pin 6 and DIO1 are not connected.
+ * Please ensure they are connected.
  *
  * This uses OTAA (Over-the-air activation), where where a DevEUI and
  * application key is configured, which are used in an over-the-air
@@ -34,6 +37,8 @@
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
+#include <arduino_lmic_hal_boards.h>
+
 #include "pin_config.h"
 
 #define COMPILE_REGRESSION_TEST
@@ -65,7 +70,7 @@ void os_getDevEui(u1_t *buf) { memcpy_P(buf, DEVEUI, 8); }
 
 // This key should be in big endian format (or, since it is not really a
 // number but a block of memory, endianness does not really apply). In
-// practice, a key taken from ttnctl can be copied as-is.
+// practice, a key taken from the TTN console can be copied as-is.
 static const u1_t PROGMEM APPKEY[16] = {FILLMEIN};
 void os_getDevKey(u1_t *buf) { memcpy_P(buf, APPKEY, 16); }
 
@@ -75,26 +80,6 @@ static osjob_t sendjob;
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
 const unsigned TX_INTERVAL = 60;
-
-#ifdef CFG_sx1262_radio
-// Pin mapping
-const lmic_pinmap lmic_pins = {
-    .nss = SX1262_CS,
-    .rxtx = LMIC_UNUSED_PIN,
-    .rst = SX1262_RST,
-    .dio = {LMIC_UNUSED_PIN, (uint8_t)SX1262_BUSY, LMIC_UNUSED_PIN},
-};
-#elif defined CFG_sx1276_radio
-// Pin mapping
-const lmic_pinmap lmic_pins = {
-    .nss = SX1276_CS,
-    .rxtx = LMIC_UNUSED_PIN,
-    .rst = SX1276_RST,
-    .dio = {LMIC_UNUSED_PIN, (uint8_t)SX1276_BUSY, LMIC_UNUSED_PIN},
-};
-#else
-#error "Unknown macro definition. Please select the correct macro definition."
-#endif
 
 void printHex2(unsigned v)
 {
@@ -173,14 +158,15 @@ void onEvent(ev_t ev)
     case EV_REJOIN_FAILED:
         Serial.println(F("EV_REJOIN_FAILED"));
         break;
+        break;
     case EV_TXCOMPLETE:
         Serial.println(F("EV_TXCOMPLETE (includes waiting for RX windows)"));
         if (LMIC.txrxFlags & TXRX_ACK)
             Serial.println(F("Received ack"));
         if (LMIC.dataLen)
         {
-            Serial.print(F("Received "));
-            Serial.print(LMIC.dataLen);
+            Serial.println(F("Received "));
+            Serial.println(LMIC.dataLen);
             Serial.println(F(" bytes of payload"));
         }
         // Schedule next transmission
@@ -251,13 +237,6 @@ void setup()
     Serial.begin(115200);
     Serial.println(F("Starting"));
 
-#ifdef VCC_ENABLE
-    // For Pinoccio Scout boards
-    pinMode(VCC_ENABLE, OUTPUT);
-    digitalWrite(VCC_ENABLE, HIGH);
-    delay(1000);
-#endif
-
     pinMode(W5500_CS, OUTPUT);
     pinMode(SCREEN_CS, OUTPUT);
     pinMode(SX1262_CS, OUTPUT);
@@ -266,10 +245,39 @@ void setup()
     digitalWrite(SCREEN_CS, HIGH);
     digitalWrite(SX1262_CS, HIGH);
 
-    // LMIC init
-    os_init();
+    // pinMode(LED_BUILTIN, OUTPUT);
+
+    SPI.begin(SX1262_SCLK, SX1262_MISO, SX1262_MOSI);
+
+    // LMIC init using the computed target
+    const lmic_pinmap *pPinMap = Arduino_LMIC::GetPinmap_ThisBoard();
+
+    // don't die mysteriously; die noisily.
+    if (pPinMap == nullptr)
+    {
+        while (1)
+        {
+            // flash lights, sleep.
+            // for (int i = 0; i < 5; ++i)
+            // {
+            //     digitalWrite(LED_BUILTIN, 1);
+            //     delay(100);
+            //     digitalWrite(LED_BUILTIN, 0);
+            //     delay(900);
+            // }
+            Serial.println(F("board not known to library; add pinmap or update getconfig_thisboard.cpp"));
+            delay(1000);
+        }
+    }
+
+    os_init_ex(pPinMap);
+
     // Reset the MAC state. Session and pending data transfers will be discarded.
     LMIC_reset();
+
+    LMIC_setLinkCheckMode(0);
+    LMIC_setDrTxpow(DR_SF7, 14);
+    LMIC_selectSubBand(1);
 
     // Start job (sending automatically starts OTAA too)
     do_send(&sendjob);

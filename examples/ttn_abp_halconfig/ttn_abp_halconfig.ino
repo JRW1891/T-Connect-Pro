@@ -37,6 +37,8 @@
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
+#include <arduino_lmic_hal_boards.h>
+
 #include "pin_config.h"
 
 #define COMPILE_REGRESSION_TEST
@@ -82,26 +84,6 @@ static osjob_t sendjob;
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
 const unsigned TX_INTERVAL = 60;
-
-#ifdef CFG_sx1262_radio
-// Pin mapping
-const lmic_pinmap lmic_pins = {
-    .nss = SX1262_CS,
-    .rxtx = LMIC_UNUSED_PIN,
-    .rst = SX1262_RST,
-    .dio = {LMIC_UNUSED_PIN, (uint8_t)SX1262_BUSY, LMIC_UNUSED_PIN},
-};
-#elif defined CFG_sx1276_radio
-// Pin mapping
-const lmic_pinmap lmic_pins = {
-    .nss = SX1276_CS,
-    .rxtx = LMIC_UNUSED_PIN,
-    .rst = SX1276_RST,
-    .dio = {LMIC_UNUSED_PIN, (uint8_t)SX1276_BUSY, LMIC_UNUSED_PIN},
-};
-#else
-#error "Unknown macro definition. Please select the correct macro definition."
-#endif
 
 void onEvent(ev_t ev)
 {
@@ -216,7 +198,6 @@ void do_send(osjob_t *j)
 void setup()
 {
     Serial.begin(115200);
-    delay(100); // per sample code on RF_95 test
     Serial.println(F("Starting"));
 
 #ifdef VCC_ENABLE
@@ -236,8 +217,29 @@ void setup()
 
     SPI.begin(SX1262_SCLK, SX1262_MISO, SX1262_MOSI);
 
-    // LMIC init
-    os_init();
+    // LMIC init using the computed target
+    const lmic_pinmap *pPinMap = Arduino_LMIC::GetPinmap_ThisBoard();
+
+    // don't die mysteriously; die noisily.
+    if (pPinMap == nullptr)
+    {
+        while (1)
+        {
+            // flash lights, sleep.
+            // for (int i = 0; i < 5; ++i)
+            // {
+            //     digitalWrite(LED_BUILTIN, 1);
+            //     delay(100);
+            //     digitalWrite(LED_BUILTIN, 0);
+            //     delay(900);
+            // }
+            Serial.println(F("pPinMap == nullptr"));
+            delay(1000);
+        }
+    }
+
+    os_init_ex(pPinMap);
+
     // Reset the MAC state. Session and pending data transfers will be discarded.
     LMIC_reset();
 
@@ -334,11 +336,11 @@ void loop()
     now = millis();
     if ((now & 512) != 0)
     {
-        digitalWrite(13, HIGH);
+        // digitalWrite(13, HIGH);
     }
     else
     {
-        digitalWrite(13, LOW);
+        // digitalWrite(13, LOW);
     }
 
     os_runloop_once();
