@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-08-18 15:05:35
+ * @LastEditTime: 2025-08-18 17:28:04
  * @License: GPL 3.0
  */
 
@@ -388,7 +388,7 @@ struct Lora_Operator
     } frequency;
     struct
     {
-        float value = 125.0;
+        float value = 62.5;
         bool change_flag = false;
     } bandwidth;
     struct
