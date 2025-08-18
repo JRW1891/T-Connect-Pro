@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-06-05 13:01:59
- * @LastEditTime: 2025-06-10 09:34:03
+ * @LastEditTime: 2025-08-18 15:01:13
  */
 #pragma once
 
@@ -10,8 +10,9 @@
 // #define T_Connect_Pro_V1_0_No_Screen
 // #define T_Connect_Pro_V1_0_No_Lora_Add_Sd_Rtc
 
-#define T_Connect_Pro_V1_0_SX1262
+// #define T_Connect_Pro_V1_0_SX1262
 // #define T_Connect_Pro_V1_0_SX1276
+#define T_Connect_Pro_V1_1_SX1276
 
 #ifdef T_Connect_Pro_V1_0
 
@@ -52,8 +53,7 @@
 #define SX1276_MOSI 11
 #define SX1276_MISO 13
 #define SX1276_BUSY 38
-#define SX1276_INT -1
-#define SX1276_DIO1 -1
+#define SX1276_INT 45
 
 #elif defined T_Connect_Pro_V1_0_No_Screen
 

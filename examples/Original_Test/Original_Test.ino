@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-08-01 18:39:34
+ * @LastEditTime: 2025-08-18 15:05:35
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202504261030"
+#define SOFTWARE_LASTEDITTIME "202508181455"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -383,7 +383,7 @@ struct Lora_Operator
 
     struct
     {
-        float value = 915.0;
+        float value = 920.0;
         bool change_flag = false;
     } frequency;
     struct
@@ -410,7 +410,7 @@ struct Lora_Operator
     {
 #ifdef T_Connect_Pro_V1_0_SX1262
         int8_t value = 22;
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
         int8_t value = 17;
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -422,7 +422,7 @@ struct Lora_Operator
     {
 #ifdef T_Connect_Pro_V1_0_SX1262
         float value = 140;
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
         float value = 240;
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -491,7 +491,9 @@ Lora_Operator Lora_Op;
 #ifdef T_Connect_Pro_V1_0_SX1262
 SX1262 radio = new Module(SX1262_CS, SX1262_DIO1, SX1262_RST, SX1262_BUSY, SPI);
 #elif defined T_Connect_Pro_V1_0_SX1276
-SX1276 radio = new Module(SX1276_CS, SX1276_DIO1, SX1276_RST, SX1276_BUSY, SPI);
+SX1276 radio = new Module(SX1276_CS, -1, SX1276_RST, SX1276_BUSY, SPI);
+#elif defined T_Connect_Pro_V1_1_SX1276
+SX1276 radio = new Module(SX1276_CS, SX1276_INT, SX1276_RST, SX1276_BUSY, SPI);
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
 #endif
@@ -518,7 +520,7 @@ void Arduino_IIC_Touch_Interrupt(void)
     CST226SE->IIC_Interrupt_Flag = true;
 }
 
-#ifdef T_Connect_Pro_V1_0_SX1262
+#if (defined T_Connect_Pro_V1_0_SX1262) || (defined T_Connect_Pro_V1_1_SX1276)
 void Lora_Operation_Interrupt(void)
 {
     // we sent or received a packet, set the flag
@@ -2361,7 +2363,7 @@ bool GFX_Print_SX12xx_Info(void)
     gfx->setCursor(40, 10);
 #ifdef T_Connect_Pro_V1_0_SX1262
     gfx->printf("SX1262 Info");
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
     gfx->printf("SX1276 Info");
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -2382,7 +2384,7 @@ bool GFX_Print_SX12xx_Info(void)
 
 #ifdef T_Connect_Pro_V1_0_SX1262
     SPI.begin(SX1262_SCLK, SX1262_MISO, SX1262_MOSI);
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
     SPI.begin(SX1276_SCLK, SX1276_MISO, SX1276_MOSI);
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -2783,7 +2785,7 @@ void Original_Test_6()
 
 #ifdef T_Connect_Pro_V1_0_SX1262
     digitalWrite(SX1262_CS, HIGH);
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
     digitalWrite(SX1276_CS, HIGH);
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -2809,7 +2811,7 @@ void Original_Test_7()
     digitalWrite(SCREEN_CS, HIGH);
 #ifdef T_Connect_Pro_V1_0_SX1262
     digitalWrite(SX1262_CS, HIGH);
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
     digitalWrite(SX1276_CS, HIGH);
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -3257,7 +3259,7 @@ void Original_Test_Loop()
                 digitalWrite(SCREEN_CS, HIGH);
 #ifdef T_Connect_Pro_V1_0_SX1262
                 digitalWrite(SX1262_CS, HIGH);
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
                 digitalWrite(SX1276_CS, HIGH);
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -3327,7 +3329,7 @@ void Original_Test_Loop()
                 digitalWrite(SCREEN_CS, HIGH);
 #ifdef T_Connect_Pro_V1_0_SX1262
                 digitalWrite(SX1262_CS, HIGH);
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
                 digitalWrite(SX1276_CS, HIGH);
 #else
 #error "Unknown macro definition. Please select the correct macro definition."
@@ -3353,7 +3355,7 @@ void setup()
 #ifdef T_Connect_Pro_V1_0_SX1262
     pinMode(SX1262_CS, OUTPUT);
     digitalWrite(SX1262_CS, HIGH);
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
     pinMode(SX1276_CS, OUTPUT);
     digitalWrite(SX1276_CS, HIGH);
 #else
@@ -3372,7 +3374,7 @@ void setup()
     Serial1.begin(115200, SERIAL_8N1, RS485_RX_1, RS485_TX_1);
     Serial2.begin(115200, SERIAL_8N1, RS485_RX_2, RS485_TX_2);
 
-#ifdef T_Connect_Pro_V1_0_SX1262
+#if (defined T_Connect_Pro_V1_0_SX1262) || (defined T_Connect_Pro_V1_1_SX1276)
     radio.setPacketReceivedAction(Lora_Operation_Interrupt);
 #endif
 
