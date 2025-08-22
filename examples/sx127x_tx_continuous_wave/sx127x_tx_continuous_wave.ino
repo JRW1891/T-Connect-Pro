@@ -63,7 +63,7 @@ void setup()
 #ifdef T_Connect_Pro_V1_0_SX1262
     pinMode(SX1262_CS, OUTPUT);
     digitalWrite(SX1262_CS, HIGH);
-#elif defined T_Connect_Pro_V1_0_SX1276
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
     pinMode(SX1276_CS, OUTPUT);
     digitalWrite(SX1276_CS, HIGH);
 #else
@@ -86,7 +86,7 @@ void setup()
             ;
     }
 
-    radio.setFrequency(945.0);
+    radio.setFrequency(915.0);
     radio.setBandwidth(125.0);
     radio.setSpreadingFactor(12);
     radio.setCodingRate(8);

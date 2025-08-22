@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-08-18 17:28:04
+ * @LastEditTime: 2025-08-21 14:07:31
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202508181455"
+#define SOFTWARE_LASTEDITTIME "202508211403"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -388,7 +388,7 @@ struct Lora_Operator
     } frequency;
     struct
     {
-        float value = 62.5;
+        float value = 125;
         bool change_flag = false;
     } bandwidth;
     struct
@@ -403,7 +403,7 @@ struct Lora_Operator
     } coding_rate;
     struct
     {
-        uint8_t value = 0x14;
+        uint8_t value = 0xAB;
         bool change_flag = false;
     } sync_word;
     struct
@@ -2534,6 +2534,8 @@ void GFX_Print_SX12xx_Info_Loop()
                 // send another one
                 Serial.println("[SX12xx] Sending another packet ... ");
 
+                radio.finishTransmit();
+
                 radio.transmit(Lora_Op.send_package, 16);
                 radio.startReceive();
             }
@@ -2602,7 +2604,7 @@ void GFX_Print_SX12xx_Info_Loop()
                         Lora_Op.device_1.connection_flag = Lora_Op.state::CONNECTED;
                         // 清除错误计数看门狗
                         Lora_Op.device_1.error_count = 0;
-                        CycleTime_2 = millis() + 500;
+                        CycleTime_2 = millis() + 2000;
                     }
                 }
             }

@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-06-05 13:01:59
- * @LastEditTime: 2025-08-18 15:01:13
+ * @LastEditTime: 2025-08-22 10:35:51
  */
 #pragma once
 
@@ -54,6 +54,7 @@
 #define SX1276_MISO 13
 #define SX1276_BUSY 38
 #define SX1276_INT 45
+#define SX1276_DIO1 45
 
 #elif defined T_Connect_Pro_V1_0_No_Screen
 
