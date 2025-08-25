@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2025-08-07 09:47:21
+ * @LastEditTime: 2025-08-25 15:28:29
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -63,7 +63,7 @@ T-Connect-Pro is a product based on the ESP32S3 main control chip, consisting of
 * Chip: CST226SE
 * Bus communication protocol: IIC
 * Dependent libraries: 
-    >[Arduino_DriveBus-1.1.2](https://github.com/Xk-w/Arduino_DriveBus)
+    >[Arduino_DriveBus-1.1.16]()
 
 ### 4. Lora
 

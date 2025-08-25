@@ -63,7 +63,7 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 * 芯片：CST226SE
 * 总线通信协议：IIC
 * 依赖库：
-    >[Arduino_DriveBus-1.1.2](https://github.com/Xk-w/Arduino_DriveBus)
+    >[Arduino_DriveBus-1.1.16]()
 
 ### 4. Lora
 
