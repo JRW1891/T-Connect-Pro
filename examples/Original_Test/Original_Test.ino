@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-08-21 14:07:31
+ * @LastEditTime: 2025-08-25 13:59:30
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202508211403"
+#define SOFTWARE_LASTEDITTIME "202508251344"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -2534,10 +2534,10 @@ void GFX_Print_SX12xx_Info_Loop()
                 // send another one
                 Serial.println("[SX12xx] Sending another packet ... ");
 
-                radio.finishTransmit();
-
                 radio.transmit(Lora_Op.send_package, 16);
                 radio.startReceive();
+
+                Lora_Op.operation_flag = false;
             }
         }
         // }
@@ -2551,12 +2551,9 @@ void GFX_Print_SX12xx_Info_Loop()
 
         if (Lora_Op.operation_flag == true)
         {
-            Lora_Op.operation_flag = false;
-
             uint8_t receive_package[16] = {'\0'};
             if (radio.readData(receive_package, 16) == RADIOLIB_ERR_NONE)
             {
-
                 if ((receive_package[0] == 'M') &&
                     (receive_package[1] == 'A') &&
                     (receive_package[2] == 'C') &&
@@ -2608,13 +2605,15 @@ void GFX_Print_SX12xx_Info_Loop()
                     }
                 }
             }
+
+            Lora_Op.operation_flag = false;
         }
         if (millis() > CycleTime_3)
         {
             Lora_Op.device_1.error_count++;
-            if (Lora_Op.device_1.error_count > 10) // 10秒超时
+            if (Lora_Op.device_1.error_count > 20) // 超时
             {
-                Lora_Op.device_1.error_count = 11;
+                Lora_Op.device_1.error_count = 21;
                 Lora_Op.device_1.send_data = 0;
                 Lora_Op.device_1.connection_flag = Lora_Op.state::UNCONNECTED;
             }

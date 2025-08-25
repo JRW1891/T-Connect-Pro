@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-06-04 14:53:05
+ * @LastEditTime: 2025-08-25 14:03:28
  * @License: GPL 3.0
  */
 
@@ -1897,8 +1897,6 @@ void GFX_Print_SX1262_Info_Loop()
 
         if (SX1262_OP.operation_flag == true)
         {
-            SX1262_OP.operation_flag = false;
-
             uint8_t receive_package[16] = {'\0'};
             if (radio.readData(receive_package, 16) == RADIOLIB_ERR_NONE)
             {
@@ -1966,6 +1964,8 @@ void GFX_Print_SX1262_Info_Loop()
                     }
                 }
             }
+
+            SX1262_OP.operation_flag = false;
         }
         if (millis() > CycleTime_3)
         {
