@@ -268,3 +268,4 @@ T-Connect-Pro基于主控芯片ESP32S3，由3层板子堆叠组合而成的产�
 
 ## 项目
 * [T-Connect-Pro_V1.0](./project/T-Connect-Pro_V1.0.pdf)
+* [T-Connect-Pro_V1.1](./project/T-Connect-Pro_V1.1.pdf)

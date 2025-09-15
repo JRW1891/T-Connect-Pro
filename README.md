@@ -2,7 +2,7 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-09-11 16:13:14
- * @LastEditTime: 2025-08-25 15:28:29
+ * @LastEditTime: 2025-09-15 10:15:26
  * @License: GPL 3.0
 -->
 <h1 align = "center">T-Connect-Pro</h1>
@@ -268,4 +268,5 @@ T-Connect-Pro is a product based on the ESP32S3 main control chip, consisting of
 
 ## Project
 * [T-Connect-Pro_V1.0](./project/T-Connect-Pro_V1.0.pdf)
+* [T-Connect-Pro_V1.1](./project/T-Connect-Pro_V1.1.pdf)
 
