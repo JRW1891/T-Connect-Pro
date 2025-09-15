@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-09-06 10:19:46
+ * @LastEditTime: 2025-09-15 09:41:47
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202509061012"
+#define SOFTWARE_LASTEDITTIME "202509150901"
 #define BOARD_VERSION "V1.0"
 
 #define WIFI_SSID "xinyuandianzi"
@@ -2533,6 +2533,8 @@ void GFX_Print_SX12xx_Info_Loop()
 
                 // send another one
                 Serial.println("[SX12xx] Sending another packet ... ");
+
+                radio.finishTransmit();
 
                 radio.transmit(Lora_Op.send_package, 16);
                 radio.startReceive();
