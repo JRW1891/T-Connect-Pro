@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-09-15 09:57:40
+ * @LastEditTime: 2025-09-16 10:20:40
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202509150901"
+#define SOFTWARE_LASTEDITTIME "202509161015"
 #if defined T_Connect_Pro_V1_0_SX1262 || T_Connect_Pro_V1_0_SX1276
 #define BOARD_VERSION "V1.0"
 #elif defined T_Connect_Pro_V1_1_SX1276
@@ -390,7 +390,7 @@ struct Lora_Operator
 
     struct
     {
-        float value = 433.0;
+        float value = 868.0;
         bool change_flag = false;
     } frequency;
     struct
@@ -1798,11 +1798,17 @@ bool SX12xx_Set_Default_Parameters(String *assertion)
     return true;
 }
 
-bool GFX_Print_SX1262_Info(void)
+bool GFX_Print_SX12xx_Info(void)
 {
     Serial.println("SX12xx initialization begins");
 
+#ifdef T_Connect_Pro_V1_0_SX1262
     SPI.begin(SX1262_SCLK, SX1262_MISO, SX1262_MOSI);
+#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
+    SPI.begin(SX1276_SCLK, SX1276_MISO, SX1276_MOSI);
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
     int16_t state = -1;
     if (Lora_Op.current_mode == Lora_Op.mode::LORA)
@@ -2156,7 +2162,7 @@ void Original_Test_7()
 #error "Unknown macro definition. Please select the correct macro definition."
 #endif
 
-    GFX_Print_SX1262_Info();
+    GFX_Print_SX12xx_Info();
 }
 
 void Original_Test_8()
