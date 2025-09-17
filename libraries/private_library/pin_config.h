@@ -2,12 +2,12 @@
  * @Description: None
  * @Author: LILYGO_L
  * @Date: 2023-06-05 13:01:59
- * @LastEditTime: 2025-09-16 10:10:17
+ * @LastEditTime: 2025-09-17 11:53:14
  */
 #pragma once
 
-// #define T_Connect_Pro_V1_0
-#define T_Connect_Pro_V1_0_No_Screen
+#define T_Connect_Pro_V1_0
+// #define T_Connect_Pro_V1_0_No_Screen
 // #define T_Connect_Pro_V1_0_No_Lora_Add_Sd_Rtc
 
 // #define T_Connect_Pro_V1_0_SX1262

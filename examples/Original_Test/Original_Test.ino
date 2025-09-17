@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-09-15 09:41:47
+ * @LastEditTime: 2025-09-17 11:53:28
  * @License: GPL 3.0
  */
 
@@ -24,8 +24,14 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202509150901"
+#define SOFTWARE_LASTEDITTIME "202509171153"
+#if defined T_Connect_Pro_V1_0_SX1262 || T_Connect_Pro_V1_0_SX1276
 #define BOARD_VERSION "V1.0"
+#elif defined T_Connect_Pro_V1_1_SX1276
+#define BOARD_VERSION "V1.1"
+#else
+#error "Unknown macro definition. Please select the correct macro definition."
+#endif
 
 #define WIFI_SSID "xinyuandianzi"
 #define WIFI_PASSWORD "AA15994823428"
@@ -383,7 +389,7 @@ struct Lora_Operator
 
     struct
     {
-        float value = 920.0;
+        float value = 860.0;
         bool change_flag = false;
     } frequency;
     struct
