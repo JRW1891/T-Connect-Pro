@@ -2,7 +2,7 @@
  * @Description: 出厂测试程序
  * @Author: LILYGO_L
  * @Date: 2025-02-05 13:48:33
- * @LastEditTime: 2025-09-16 10:20:40
+ * @LastEditTime: 2025-10-10 10:42:47
  * @License: GPL 3.0
  */
 
@@ -24,7 +24,7 @@
 
 #define SOFTWARE_NAME "Original_Test"
 
-#define SOFTWARE_LASTEDITTIME "202509161015"
+#define SOFTWARE_LASTEDITTIME "202510101042"
 #if defined T_Connect_Pro_V1_0_SX1262 || T_Connect_Pro_V1_0_SX1276
 #define BOARD_VERSION "V1.0"
 #elif defined T_Connect_Pro_V1_1_SX1276
@@ -390,7 +390,7 @@ struct Lora_Operator
 
     struct
     {
-        float value = 868.0;
+        float value = 915.0;
         bool change_flag = false;
     } frequency;
     struct
@@ -1384,16 +1384,16 @@ void GFX_Print_RS485_Info_Loop(void)
                 {
                     // delay(500);
 
-                    Serial.printf("[RS485] Check Data Successful\n");
-                    Serial.printf("[RS485] Check Data: %d\n", RS485_OP.device_2.send_data);
-                    Serial.printf("[RS485] Received Data: %d\n", (uint32_t)uart_receive_package[1] << 24 | (uint32_t)uart_receive_package[2] << 16 |
-                                                                     (uint32_t)uart_receive_package[3] << 8 | (uint32_t)uart_receive_package[4]);
-                    Serial.printf("[RS485] Received Buf[1]: %#X\n", uart_receive_package[1]);
-                    Serial.printf("[RS485] Received Buf[2]: %#X\n", uart_receive_package[2]);
-                    Serial.printf("[RS485] Received Buf[3]: %#X\n", uart_receive_package[3]);
-                    Serial.printf("[RS485] Received Buf[4]: %#X\n", uart_receive_package[4]);
+                    // Serial.printf("[RS485] Check Data Successful\n");
+                    // Serial.printf("[RS485] Check Data: %d\n", RS485_OP.device_2.send_data);
+                    // Serial.printf("[RS485] Received Data: %d\n", (uint32_t)uart_receive_package[1] << 24 | (uint32_t)uart_receive_package[2] << 16 |
+                    //                                                  (uint32_t)uart_receive_package[3] << 8 | (uint32_t)uart_receive_package[4]);
+                    // Serial.printf("[RS485] Received Buf[1]: %#X\n", uart_receive_package[1]);
+                    // Serial.printf("[RS485] Received Buf[2]: %#X\n", uart_receive_package[2]);
+                    // Serial.printf("[RS485] Received Buf[3]: %#X\n", uart_receive_package[3]);
+                    // Serial.printf("[RS485] Received Buf[4]: %#X\n", uart_receive_package[4]);
 
-                    Serial.printf("[RS485] Received Buf[105]: %#X\n", uart_receive_package[104]);
+                    // Serial.printf("[RS485] Received Buf[105]: %#X\n", uart_receive_package[104]);
 
                     RS485_OP.device_2.receive_data =
                         ((uint32_t)uart_receive_package[1] << 24) |
@@ -2232,141 +2232,141 @@ void Original_Test_8()
 
 void Original_Test_Loop()
 {
-#ifdef T_Connect_Pro_V1_0_SX1262
-    Serial_Print_TEST("SX1262 callback distance test");
-#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
-    Serial_Print_TEST("SX1276 callback distance test");
-#else
-#error "Unknown macro definition. Please select the correct macro definition."
-#endif
+    #ifdef T_Connect_Pro_V1_0_SX1262
+        Serial_Print_TEST("SX1262 callback distance test");
+    #elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
+        Serial_Print_TEST("SX1276 callback distance test");
+    #else
+    #error "Unknown macro definition. Please select the correct macro definition."
+    #endif
 
-    if (Skip_Current_Test == false)
-    {
-        Original_Test_7();
-        while (1)
+        if (Skip_Current_Test == false)
         {
-            bool temp = false;
-
-            GFX_Print_SX12xx_Info_Loop();
-
-            if (digitalRead(KEY_A) == LOW)
+            Original_Test_7();
+            while (1)
             {
-                delay(300);
-                Serial.printf("KEY_A triggered reinitialize test\n\n");
-#ifdef T_Connect_Pro_V1_0_SX1262
-                Serial_Print_TEST("SX1262 callback distance test");
-#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
-                Serial_Print_TEST("SX1276 callback distance test");
-#else
-#error "Unknown macro definition. Please select the correct macro definition."
-#endif
-                Original_Test_7();
-                if (Skip_Current_Test == true)
+                bool temp = false;
+
+                GFX_Print_SX12xx_Info_Loop();
+
+                if (digitalRead(KEY_A) == LOW)
                 {
+                    delay(300);
+                    Serial.printf("KEY_A triggered reinitialize test\n\n");
+    #ifdef T_Connect_Pro_V1_0_SX1262
+                    Serial_Print_TEST("SX1262 callback distance test");
+    #elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
+                    Serial_Print_TEST("SX1276 callback distance test");
+    #else
+    #error "Unknown macro definition. Please select the correct macro definition."
+    #endif
+                    Original_Test_7();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                }
+
+                if (digitalRead(ESP_BOOT) == LOW)
+                {
+                    delay(300);
+                    Serial.printf("ESP_BOOT triggered Start the next test\n\n");
                     temp = true;
                 }
-            }
 
-            if (digitalRead(ESP_BOOT) == LOW)
-            {
-                delay(300);
-                Serial.printf("ESP_BOOT triggered Start the next test\n\n");
-                temp = true;
-            }
-
-            if (digitalRead(KEY_B) == LOW)
-            {
-                Lora_Op.device_1.send_flag = true;
-                Lora_Op.device_1.connection_flag = Lora_Op.state::CONNECTING;
-                // 清除错误计数看门狗
-                Lora_Op.device_1.error_count = 0;
-                CycleTime_2 = millis() + 1000;
-            }
-
-            if (temp == true)
-            {
-                digitalWrite(W5500_CS, HIGH);
-
-#ifdef T_Connect_Pro_V1_0_SX1262
-                digitalWrite(SX1262_CS, HIGH);
-#elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
-                digitalWrite(SX1276_CS, HIGH);
-#else
-#error "Unknown macro definition. Please select the correct macro definition."
-#endif
-
-                break;
-            }
-        }
-    }
-
-    Serial_Print_TEST("LED Color Test");
-    if (Skip_Current_Test == false)
-    {
-        Original_Test_4();
-        while (1)
-        {
-            bool temp = false;
-
-            if (digitalRead(KEY_A) == LOW)
-            {
-                delay(300);
-                Serial.printf("KEY_A triggered reinitialize test\n\n");
-                Serial_Print_TEST("LCD Color Test");
-                Original_Test_4();
-                if (Skip_Current_Test == true)
+                if (digitalRead(KEY_B) == LOW)
                 {
-                    temp = true;
+                    Lora_Op.device_1.send_flag = true;
+                    Lora_Op.device_1.connection_flag = Lora_Op.state::CONNECTING;
+                    // 清除错误计数看门狗
+                    Lora_Op.device_1.error_count = 0;
+                    CycleTime_2 = millis() + 1000;
+                }
+
+                if (temp == true)
+                {
+                    digitalWrite(W5500_CS, HIGH);
+
+    #ifdef T_Connect_Pro_V1_0_SX1262
+                    digitalWrite(SX1262_CS, HIGH);
+    #elif (defined T_Connect_Pro_V1_0_SX1276) || (defined T_Connect_Pro_V1_1_SX1276)
+                    digitalWrite(SX1276_CS, HIGH);
+    #else
+    #error "Unknown macro definition. Please select the correct macro definition."
+    #endif
+
+                    break;
                 }
             }
-
-            if (digitalRead(ESP_BOOT) == LOW)
-            {
-                delay(300);
-                Serial.printf("ESP_BOOT triggered Start the next test\n\n");
-                temp = true;
-            }
-
-            if (temp == true)
-            {
-                break;
-            }
         }
-    }
 
-    Serial_Print_TEST("WIFI STA Test");
-    if (Skip_Current_Test == false)
-    {
-        Original_Test_8();
-        while (1)
+        Serial_Print_TEST("LED Color Test");
+        if (Skip_Current_Test == false)
         {
-            bool temp = false;
-
-            if (digitalRead(KEY_A) == LOW)
+            Original_Test_4();
+            while (1)
             {
-                delay(300);
-                Serial.printf("KEY_A triggered reinitialize test\n\n");
-                Serial_Print_TEST("WIFI STA Test");
-                Original_Test_8();
-                if (Skip_Current_Test == true)
+                bool temp = false;
+
+                if (digitalRead(KEY_A) == LOW)
                 {
+                    delay(300);
+                    Serial.printf("KEY_A triggered reinitialize test\n\n");
+                    Serial_Print_TEST("LCD Color Test");
+                    Original_Test_4();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                }
+
+                if (digitalRead(ESP_BOOT) == LOW)
+                {
+                    delay(300);
+                    Serial.printf("ESP_BOOT triggered Start the next test\n\n");
                     temp = true;
                 }
-            }
 
-            if (digitalRead(ESP_BOOT) == LOW)
-            {
-                delay(300);
-                Serial.printf("ESP_BOOT triggered Start the next test\n\n");
-                temp = true;
-            }
-
-            if (temp == true)
-            {
-                break;
+                if (temp == true)
+                {
+                    break;
+                }
             }
         }
-    }
+
+        Serial_Print_TEST("WIFI STA Test");
+        if (Skip_Current_Test == false)
+        {
+            Original_Test_8();
+            while (1)
+            {
+                bool temp = false;
+
+                if (digitalRead(KEY_A) == LOW)
+                {
+                    delay(300);
+                    Serial.printf("KEY_A triggered reinitialize test\n\n");
+                    Serial_Print_TEST("WIFI STA Test");
+                    Original_Test_8();
+                    if (Skip_Current_Test == true)
+                    {
+                        temp = true;
+                    }
+                }
+
+                if (digitalRead(ESP_BOOT) == LOW)
+                {
+                    delay(300);
+                    Serial.printf("ESP_BOOT triggered Start the next test\n\n");
+                    temp = true;
+                }
+
+                if (temp == true)
+                {
+                    break;
+                }
+            }
+        }
 
     Serial_Print_TEST("RS485232CAN Test");
     if (Skip_Current_Test == false)
@@ -2401,28 +2401,39 @@ void Original_Test_Loop()
 
             if (digitalRead(KEY_B) == LOW)
             {
-                RS485_OP.device_1.send_flag = true;
-                RS485_OP.device_1.send_data = 0;
-                RS485_OP.device_1.connection_status = RS485_OP.state::CONNECTING;
-                // 清除错误计数看门狗
-                RS485_OP.device_1.error.count = 0;
+                if (RS485_OP.device_1.connection_status != RS485_OP.state::CONNECTED)
+                {
+                    RS485_OP.device_1.send_flag = true;
+                    RS485_OP.device_1.send_data = 0;
+                    RS485_OP.device_1.connection_status = RS485_OP.state::CONNECTING;
+                    // 清除错误计数看门狗
+                    RS485_OP.device_1.error.count = 0;
 
-                RS485_OP.device_2.send_flag = true;
-                RS485_OP.device_2.send_data = 0;
-                RS485_OP.device_2.connection_status = RS485_OP.state::CONNECTING;
-                // 清除错误计数看门狗
-                RS485_OP.device_2.error.count = 0;
+                    CycleTime_2 = millis() + 1000;
+                }
 
-                CAN_OP.device_1.send_flag = true;
-                CAN_OP.device_1.connection_status = CAN_OP.state::CONNECTING;
-                // 清除错误
-                CAN_OP.device_1.error.code = "null";
-                // 清除错误计数看门狗
-                CAN_OP.device_1.error.count = 0;
+                if (RS485_OP.device_2.connection_status != RS485_OP.state::CONNECTED)
+                {
+                    RS485_OP.device_2.send_flag = true;
+                    RS485_OP.device_2.send_data = 0;
+                    RS485_OP.device_2.connection_status = RS485_OP.state::CONNECTING;
+                    // 清除错误计数看门狗
+                    RS485_OP.device_2.error.count = 0;
 
-                CycleTime_2 = millis() + 1000;
-                CycleTime_4 = millis() + 1000;
-                CycleTime_7 = millis() + 1000;
+                    CycleTime_4 = millis() + 1000;
+                }
+
+                if (CAN_OP.device_1.connection_status != RS485_OP.state::CONNECTED)
+                {
+                    CAN_OP.device_1.send_flag = true;
+                    CAN_OP.device_1.connection_status = CAN_OP.state::CONNECTING;
+                    // 清除错误
+                    CAN_OP.device_1.error.code = "null";
+                    // 清除错误计数看门狗
+                    CAN_OP.device_1.error.count = 0;
+
+                    CycleTime_7 = millis() + 1000;
+                }
             }
 
             if (temp == true)
